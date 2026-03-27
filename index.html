@@ -3,31 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>MirrorForge Application</title>
     <style>
         body {
-            overflow: auto; /* changed from hidden to auto */
+            overflow: auto;
         }
-
         .hidden {
             display: none;
         }
-
         .screen {
-            overflow-y: auto; /* added overflow-y:auto */
+            overflow-y: auto;
         }
-
         .card {
-            overflow-y: auto; /* added overflow-y:auto */
+            overflow-y: auto;
+            max-height: 90vh;
         }
     </style>
 </head>
 <body>
     <div class="screen">
-        <!-- screen content here -->
+        <h1>Welcome to MirrorForge!</h1>
+        <div class="card">
+            <h2>Onboarding Form</h2>
+            <form id="onboarding-form">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+                <button type="submit">Start</button>
+            </form>
+        </div>
     </div>
-    <div class="card">
-        <!-- card content here -->
-    </div>
+    <script>
+        // Intro speech functionality
+        const introSpeech = () => {
+            alert('Welcome to the MirrorForge Application!');
+        };
+
+        // Typing text effect for the introduction
+        const typeText = (target, text) => {
+            let index = 0;
+            const interval = setInterval(() => {
+                if (index < text.length) {
+                    target.textContent += text[index];
+                    index++;
+                } else {
+                    clearInterval(interval);
+                }
+            }, 100);
+        };
+
+        // Submit onboarding form functionality
+        document.getElementById('onboarding-form').addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent default form submission
+            const name = document.getElementById('name').value;
+            alert('Welcome, ' + name + '!');
+            // Further functionality can be added here
+        });
+
+        // Load intro speech on page load
+        window.onload = introSpeech;
+    </script>
 </body>
 </html>
