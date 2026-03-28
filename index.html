@@ -20,9 +20,12 @@ textarea{min-height:130px;resize:none;}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 .notice{background:rgba(212,175,119,.09);border:1px solid var(--accent);border-radius:18px;padding:22px;color:var(--muted);white-space:pre-line;line-height:1.7;}
 .hidden{display:none;}
+#muteBtn{position:fixed;top:16px;right:16px;z-index:999;background:rgba(0,0,0,.65);color:var(--accent);border:1px solid var(--accent);border-radius:10px;padding:8px 18px;font-size:.9rem;cursor:pointer;letter-spacing:.5px;transition:opacity .3s;}
+#muteBtn:hover{opacity:.8;}
 </style>
 </head>
 <body>
+<button id="muteBtn" class="hidden" onclick="toggleMute()">🔊 Tune</button>
 
 <div id="hero" class="screen">
   <div class="card" style="text-align:center;">
@@ -129,6 +132,7 @@ const introLines = [
 let introIndex = 0;
 
 function startOnboarding() {
+  initWarmTune();
   document.getElementById("hero").classList.add("hidden");
   document.getElementById("intro").classList.remove("hidden");
   document.getElementById("introText").innerHTML = "";
@@ -260,6 +264,106 @@ async function saveEvening() {
 
 function resetAll() {
   if (confirm("Reset everything?")) location.reload();
+}
+
+/* ── WARM TUNE ─────────────────────────────────────── */
+let audioCtx = null;
+let masterGain = null;
+let muteGain = null;
+let tuneStarted = false;
+let isMuted = false;
+let arpPos = 0;
+
+// A-major pentatonic: A3 B3 C#4 E4 F#4 A4 (Hz)
+const warmNotes = [220, 246.94, 277.18, 329.63, 369.99, 440];
+
+function initWarmTune() {
+  if (tuneStarted) return;
+  tuneStarted = true;
+  try {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  } catch(e) {
+    console.warn("Web Audio API not supported — tune unavailable.");
+    return;
+  }
+
+  masterGain = audioCtx.createGain();
+  masterGain.gain.value = 0.5;
+
+  muteGain = audioCtx.createGain();
+  muteGain.gain.setValueAtTime(0, audioCtx.currentTime);
+  muteGain.gain.linearRampToValueAtTime(1, audioCtx.currentTime + 4);
+
+  masterGain.connect(muteGain);
+  muteGain.connect(audioCtx.destination);
+
+  // Slow breathing LFO
+  const lfo = audioCtx.createOscillator();
+  const lfoGain = audioCtx.createGain();
+  lfo.type = 'sine';
+  lfo.frequency.value = 0.06;
+  lfoGain.gain.value = 0.12;
+  lfo.connect(lfoGain);
+  lfoGain.connect(masterGain.gain);
+  lfo.start();
+
+  // Warm bass drones (sine waves, very low volume)
+  createDrone(55,  'sine', 0.10);
+  createDrone(110, 'sine', 0.07);
+  createDrone(165, 'sine', 0.04);
+
+  // Start pentatonic arpeggio
+  runArpeggio();
+
+  document.getElementById('muteBtn').classList.remove('hidden');
+}
+
+function createDrone(freq, type, vol) {
+  const osc  = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+  osc.type = type;
+  osc.frequency.value = freq;
+  gain.gain.value = vol;
+  osc.connect(gain);
+  gain.connect(masterGain);
+  osc.start();
+}
+
+function runArpeggio() {
+  if (!audioCtx) return;
+  const freq = warmNotes[arpPos % warmNotes.length];
+  arpPos++;
+
+  const osc = audioCtx.createOscillator();
+  const env = audioCtx.createGain();
+  osc.type = 'triangle';
+  osc.frequency.value = freq;
+  const now = audioCtx.currentTime;
+  env.gain.setValueAtTime(0, now);
+  env.gain.linearRampToValueAtTime(0.055, now + 0.5);
+  env.gain.linearRampToValueAtTime(0.001, now + 3.2);
+  osc.connect(env);
+  env.connect(masterGain);
+  osc.start(now);
+  osc.stop(now + 3.3);
+
+  setTimeout(runArpeggio, 1800 + Math.random() * 900);
+}
+
+function toggleMute() {
+  if (!audioCtx) { initWarmTune(); return; }
+  const btn = document.getElementById('muteBtn');
+  const now = audioCtx.currentTime;
+  isMuted = !isMuted;
+  if (isMuted) {
+    muteGain.gain.cancelScheduledValues(now);
+    muteGain.gain.linearRampToValueAtTime(0, now + 0.8);
+    btn.textContent = '🔇 Tune';
+  } else {
+    muteGain.gain.cancelScheduledValues(now);
+    muteGain.gain.linearRampToValueAtTime(1, now + 0.8);
+    btn.textContent = '🔊 Tune';
+  }
 }
 </script>
 </body>
