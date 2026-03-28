@@ -19,6 +19,7 @@ input,textarea{width:100%;padding:18px;margin:12px 0;background:#111;border:1px 
 textarea{min-height:130px;resize:none;}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:20px;}
 .notice{background:rgba(212,175,119,.09);border:1px solid var(--accent);border-radius:18px;padding:22px;color:var(--muted);white-space:pre-line;line-height:1.7;}
+.hidden{display:none;}
 </style>
 </head>
 <body>
@@ -29,7 +30,7 @@ textarea{min-height:130px;resize:none;}
     <p>90 days. No excuses. Only the disciplined, respected version of you remains.</p>
     <small style="color:var(--accent);font-size:1.2rem;">Built on Napoleon Hill’s principles • Radical honesty • Daily accountability</small>
     <div style="margin-top:50px;">
-      <button id="beginBtn" class="btn">BEGIN THE FORGE</button>
+      <button id="beginBtn" class="btn" onclick="startOnboarding()">BEGIN THE FORGE</button>
       <button class="btn secondary" onclick="resetAll()">Reset Everything</button>
     </div>
   </div>
@@ -106,7 +107,12 @@ textarea{min-height:130px;resize:none;}
 <script>
 const SUPABASE_URL = "https://jmkuejziomumqroxynic.supabase.co";
 const SUPABASE_ANON_KEY = "sb_publishable_CzwG6Fiym13XdB5RJlRo5A_Jvng6fZ6";
-const supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+let supabase = null;
+try {
+  supabase = Supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+} catch(e) {
+  console.warn("Supabase unavailable:", e.message);
+}
 
 const introLines = [
   "Sit down. Breathe deeply.",
@@ -183,6 +189,11 @@ async function saveOnboarding() {
     return;
   }
 
+  if (!supabase) {
+    alert("⚠️ Database unavailable — profile not persisted this session.");
+    showContract();
+    return;
+  }
   const { error } = await supabase.from('user_profiles').insert([profile]);
   if (error) alert("Error saving: " + error.message);
   else {
@@ -229,6 +240,11 @@ async function saveEvening() {
 
   const mirrorText = "Evening Mirror.<br>You showed up today.<br>The Mirror remembers.";
 
+  if (!supabase) {
+    document.getElementById("eveningMirror").innerHTML = mirrorText;
+    alert("⚠️ Database unavailable — reflection not persisted this session.");
+    return;
+  }
   const { error } = await supabase.from('journal_entries').insert([{
     entry_date: new Date().toISOString().split('T')[0],
     content: lesson,
