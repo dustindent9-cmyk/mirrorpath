@@ -1,0 +1,27 @@
+{
+  "tools": {
+    "file_read":    {"allowed": true,  "paths": ["./", "~/.agent_os/"]},
+    "file_write":   {"allowed": true,  "paths": ["./output/", "~/.agent_os/memory/"]},
+    "code_run":     {"allowed": true,  "sandbox": true, "timeout_seconds": 30},
+    "web_search":   {"allowed": true,  "max_results": 10},
+    "web_fetch":    {"allowed": true,  "blocked_domains": []},
+    "api_call":     {"allowed": true,  "require_confirmation": false},
+    "browser":      {"allowed": true,  "headless": true},
+    "shell":        {"allowed": false, "note": "Disabled by default; enable per-session"}
+  },
+  "agents": {
+    "executor":     {"can_spawn_subagents": false, "max_tool_calls": 20},
+    "planner":      {"can_spawn_subagents": true,  "max_tool_calls": 10},
+    "browser_agent":{"can_spawn_subagents": false, "max_tool_calls": 30}
+  },
+  "consensus": {
+    "min_agents":   2,
+    "quorum":       0.6,
+    "timeout_s":    120
+  },
+  "verification": {
+    "enabled":      true,
+    "auto_verify":  ["code", "plan", "api_call"],
+    "max_retries":  3
+  }
+}

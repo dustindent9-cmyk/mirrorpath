@@ -1,0 +1,47 @@
+{
+  "providers": {
+    "anthropic": {
+      "module": "tools.anthropic_client",
+      "functions": ["claude_chat", "claude_stream", "claude_with_tools"],
+      "default_model": "claude-opus-4-6",
+      "env_key": "ANTHROPIC_API_KEY"
+    },
+    "openai": {
+      "module": "tools.openai_client",
+      "functions": ["openai_reason", "openai_code_task", "openai_chat"],
+      "default_model": "gpt-4o",
+      "env_key": "OPENAI_API_KEY"
+    },
+    "gemini": {
+      "module": "tools.gemini_client",
+      "functions": ["gemini_text", "gemini_video_summary", "gemini_vision", "gemini_long_context"],
+      "default_model": "gemini-2.5-pro",
+      "env_key": "GEMINI_API_KEY"
+    },
+    "browserbase": {
+      "module": "tools.browserbase_client",
+      "functions": ["create_session", "fetch_page", "list_sessions", "stop_session"],
+      "env_key": "BROWSERBASE_API_KEY"
+    }
+  },
+  "routing": {
+    "video":    "gemini",
+    "code":     "openai",
+    "browser":  "browserbase",
+    "default":  "anthropic"
+  },
+  "tool_registry": [
+    {"name": "read_file",          "module": "tools.file_tools"},
+    {"name": "write_file",         "module": "tools.file_tools"},
+    {"name": "append_file",        "module": "tools.file_tools"},
+    {"name": "list_files",         "module": "tools.file_tools"},
+    {"name": "run_code",           "module": "tools.code_runner"},
+    {"name": "api_call",           "module": "tools.api_caller"},
+    {"name": "web_search",         "module": "tools.web_search"},
+    {"name": "fetch_page",         "module": "tools.web_search"},
+    {"name": "open_tab",           "module": "tools.browser_control"},
+    {"name": "open_multiple",      "module": "tools.browser_control"},
+    {"name": "save_memory",        "module": "tools.memory_store"},
+    {"name": "recall",             "module": "tools.memory_store"}
+  ]
+}

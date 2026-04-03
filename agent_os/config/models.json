@@ -1,0 +1,27 @@
+{
+  "default": "claude-opus-4-6",
+  "fast": "claude-haiku-4-5",
+  "balanced": "claude-sonnet-4-6",
+  "agents": {
+    "planner":       "claude-opus-4-6",
+    "coder":         "claude-opus-4-6",
+    "researcher":    "claude-sonnet-4-6",
+    "critic":        "claude-opus-4-6",
+    "executor":      "claude-sonnet-4-6",
+    "memory_agent":  "claude-haiku-4-5",
+    "user_advocate": "claude-sonnet-4-6",
+    "browser_agent": "claude-sonnet-4-6"
+  },
+  "thinking": {
+    "planner":  {"type": "adaptive"},
+    "coder":    {"type": "adaptive"},
+    "critic":   {"type": "adaptive"},
+    "default":  {"type": "adaptive"}
+  },
+  "max_tokens": {
+    "default": 16000,
+    "coder":   32000,
+    "planner": 16000,
+    "fast":     4096
+  }
+}
