@@ -34,6 +34,32 @@ def score_responses(responses: list[dict]) -> dict:
     scored.sort(reverse=True)
     return scored[0][1] if scored else {}
 
+
+def choose_best(candidates: list[dict]) -> dict:
+    """
+    Weighted scoring for candidates with rich metadata.
+
+    Candidate schema:
+      agent: str, answer: str, confidence: float,
+      aligned_with_user: bool, verified: bool, criticisms_found: int
+
+    Weights:
+      confidence      × 3
+      aligned_with_user → +2
+      verified          → +2
+      criticisms_found  → -0.5 each
+    """
+    def _score(c: dict) -> float:
+        s = 0.0
+        s += c.get("confidence", 0) * 3
+        s += 2 if c.get("aligned_with_user") else 0
+        s += 2 if c.get("verified") else 0
+        s -= 0.5 * c.get("criticisms_found", 0)
+        return s
+
+    ranked = sorted(candidates, key=_score, reverse=True)
+    return ranked[0] if ranked else {}
+
 from .mcp import AgentResult
 
 

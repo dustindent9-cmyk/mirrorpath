@@ -1,65 +1,75 @@
-# Skill: Multi-Agent MCP (Multi-Model Control Plane)
+# Skill: Multi-Agent MCP Orchestration
 
-How Dallas routes tasks across agents and models.
+## Shared Capabilities (all agents)
+- Read files
+- Write / edit files
+- Run code
+- Search web
+- Fetch web pages
+- Call external APIs
+- Use browser sessions
+- Save memory
+- Critique peer outputs
+- Verify claims before final answer
 
 ## Model Routing
 
-Each agent uses the model best suited to its task:
-
-| Agent          | Model              | Reasoning                          |
-|---------------|--------------------|------------------------------------|
-| Planner        | claude-opus-4-6    | Complex decomposition, thinking    |
-| Coder          | claude-opus-4-6    | Best code quality, adaptive think  |
-| Researcher     | claude-sonnet-4-6  | Fast retrieval, good synthesis     |
-| Critic         | claude-opus-4-6    | Rigorous review needs best model   |
-| Executor       | claude-sonnet-4-6  | Execution doesn't need deep think  |
-| Memory Agent   | claude-haiku-4-5   | Simple CRUD, speed matters         |
-| User Advocate  | claude-sonnet-4-6  | Context understanding              |
-| Browser Agent  | claude-sonnet-4-6  | Web navigation, speed              |
-
-## External Model Routing
-
-Tasks can be routed to non-Claude models when appropriate:
+| Provider    | Use for                                                  |
+|------------|----------------------------------------------------------|
+| Claude      | Planner, orchestrator, critic, user advocate             |
+| Gemini      | Video understanding, multimodal review, long context     |
+| OpenAI      | Code execution, MCP integrations, tool-heavy tasks       |
+| Browserbase | Browser automation, page fetches, session control        |
 
 ```python
-def route_task(task):
-    if "video" in task:
-        return "gemini"       # Video understanding
-    elif "code" in task:
-        return "claude"       # Claude for code (best quality)
-    else:
-        return "claude"       # Default: Claude
+def route_to_provider(task: str) -> str:
+    t = task.lower()
+    if "video" in t or "watch this" in t or "timestamp" in t:
+        return "gemini"
+    if "run code" in t or "debug" in t or "mcp" in t:
+        return "openai"
+    if "browse" in t or "website" in t or "browser" in t or "tab" in t:
+        return "browser"
+    return "claude"
 ```
 
-## Agent Routing (keyword-based)
+## Coordination Rules
 
-| Keywords                          | Agent(s)              |
-|-----------------------------------|-----------------------|
-| plan, design, architect, strategy | Planner               |
-| research, find, search, explain   | Researcher            |
-| code, implement, build, fix       | Coder                 |
-| review, critique, audit           | Critic                |
-| execute, run, do, automate        | Executor              |
-| browse, navigate, website, scrape | Browser Agent         |
-| remember, recall, memory          | Memory Agent          |
-| align, confirm, user need         | User Advocate         |
+1. **Planner** decomposes task into ordered phases
+2. **Researcher** gathers evidence and context
+3. **Coder** proposes implementation
+4. **Critic** attacks weak assumptions
+5. **User Advocate** checks user benefit and intent
+6. **Verifier** validates result (6-step loop)
+7. **Consensus** chooses best answer (`choose_best()`)
+8. **Memory Agent** stores durable lessons
 
-## Parallel Dispatch
-When task requires multiple independent workstreams:
-1. MCP identifies independent phases from the plan
-2. Dispatches each to its agent with shared context
-3. Results collected → Consensus engine synthesizes
+## Sub-Agent Verification Contract
 
-## Session Management
-- `mcp.dispatch()` → single-threaded sequential execution
-- `mcp.dispatch_parallel_concept()` → independent contexts, no shared history
-- Results logged in `mcp._session_log` for Memory Agent to summarize
+Every agent must state:
+- What it did
+- Confidence (0.0–1.0)
+- Likely failure points
+- What should be checked next
+
+## Reverse Prompting Protocol
+
+Before every non-trivial action:
+1. Restate task in own words
+2. Define what success looks like
+3. Identify risks
+4. Identify missing data
+5. Execute
 
 ## Consensus Scoring
 
-Responses scored on three dimensions:
-- `confidence > 0.7` → +1
-- `no errors` → +1
-- `aligned_with_user` → +1
-
-Best score wins. Ties arbitrated by meta-Claude call.
+```python
+def choose_best(candidates):
+    def score(c):
+        s  = c.get("confidence", 0) * 3
+        s += 2 if c.get("aligned_with_user") else 0
+        s += 2 if c.get("verified") else 0
+        s -= 0.5 * c.get("criticisms_found", 0)
+        return s
+    return sorted(candidates, key=score, reverse=True)[0]
+```
