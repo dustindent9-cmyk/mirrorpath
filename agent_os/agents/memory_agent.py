@@ -37,6 +37,12 @@ Be concise — memory entries should be dense with signal, not padded.
 
     # ── Public memory operations ────────────────────────────────────────────
 
+    def update_memory(self, note: str) -> None:
+        """Append a quick note to claude.md (the system's living memory file)."""
+        claude_md = Path(__file__).parent.parent / "claude.md"
+        with open(claude_md, "a", encoding="utf-8") as f:
+            f.write(f"\n- {note}")
+
     def store(self, key: str, value: str, category: str = "general", source: str = "system") -> str:
         """Persist a memory entry."""
         entry = {

@@ -1,7 +1,23 @@
-"""Browser control — wraps Playwright for headless web automation."""
+"""Browser control — wraps Playwright for headless web automation.
+Also provides lightweight tab-opener utilities via webbrowser (no Playwright needed).
+"""
 from __future__ import annotations
 
+import webbrowser
 from pathlib import Path
+
+
+# ── Lightweight tab helpers (no Playwright required) ────────────────────────
+
+def open_tab(url: str) -> None:
+    """Open a URL in the user's default browser."""
+    webbrowser.open(url)
+
+
+def open_multiple(urls: list[str]) -> None:
+    """Open each URL in a new browser tab."""
+    for url in urls:
+        webbrowser.open_new_tab(url)
 
 
 class BrowserController:

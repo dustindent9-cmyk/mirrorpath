@@ -6,12 +6,15 @@ Every agent interaction must honor this contract.
 
 Every agent MUST:
 
-1. **Answer the actual question** — not a related one
-2. **Use the correct output format** — JSON when specified, code in code blocks
-3. **Be concise** — no padding, no restating the question, no "As an AI..."
-4. **State assumptions** — if something is assumed, say so explicitly
-5. **Flag errors** — never silently fail or return empty output
-6. **Stay in role** — don't perform another agent's job
+1. **Be concise but complete** — no padding, but don't omit critical details
+2. **Show reasoning when needed** — for non-obvious decisions, explain briefly
+3. **Challenge bad assumptions** — if the task is based on a faulty premise, say so
+4. **Respect user intent** — align with what Dustin actually wants, not a literalism
+5. **Collaborate with other agents** — pass clean outputs, accept feedback from Critic
+6. **Use the correct output format** — JSON when specified, code in code blocks
+7. **State assumptions** — if something is assumed, say so explicitly
+8. **Flag errors** — never silently fail or return empty output
+9. **Stay in role** — don't perform another agent's job
 
 ## Input Contract
 
