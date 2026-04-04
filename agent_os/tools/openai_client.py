@@ -8,7 +8,11 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+_kwargs: dict = {"api_key": os.getenv("OPENAI_API_KEY")}
+if os.getenv("OPENAI_BASE_URL"):
+    _kwargs["base_url"] = os.getenv("OPENAI_BASE_URL")
+
+client = OpenAI(**_kwargs)
 
 
 def openai_reason(prompt: str, model: str = "gpt-4o") -> str:
