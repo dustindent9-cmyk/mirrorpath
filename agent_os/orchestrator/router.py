@@ -65,6 +65,12 @@ ROUTING_TABLE: list[tuple[str, str, str, list[str]]] = [
     # Memory / recall
     (r"\b(remember|recall|what did|history|store|memory)\b",
      "anthropic", "memory_agent", []),
+
+    # Self-modification — must come LAST so it doesn't shadow other patterns
+    (r"\b(update your(self)?|modify your(self)?|change your(self)?|edit your(self)?"
+     r"|fix your|add to your(self)?|remove from your(self)?"
+     r"|rewrite your(self)?|improve your(self)?|upgrade your(self)?)\b",
+     "anthropic", "self_modifier", []),
 ]
 
 

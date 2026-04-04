@@ -65,6 +65,7 @@ def get_engine() -> Engine:
             from agents.executor import ExecutorAgent
             from agents.memory_agent import MemoryAgent
             from agents.user_advocate import UserAdvocateAgent
+            from agents.self_modifier import SelfModifierAgent
 
             _engine.register_all({
                 "planner":       PlannerAgent(),
@@ -74,6 +75,7 @@ def get_engine() -> Engine:
                 "executor":      ExecutorAgent(),
                 "memory_agent":  MemoryAgent(),
                 "user_advocate": UserAdvocateAgent(),
+                "self_modifier": SelfModifierAgent(),
             })
         except Exception as e:
             # Agents optional — engine still routes via providers
@@ -97,6 +99,7 @@ class ChatResponse(BaseModel):
     consensus_score: float
     elapsed_ms: int
     notes: list[str]
+    self_modified: bool = False   # True when the self_modifier agent ran
 
 
 # ── Routes ────────────────────────────────────────────────────────────────────
@@ -112,11 +115,12 @@ async def index():
 @app.get("/api/health")
 async def health():
     keys = {
-        "anthropic": bool(os.environ.get("ANTHROPIC_API_KEY")),
-        "openai":    bool(os.environ.get("OPENAI_API_KEY")),
-        "gemini":    bool(os.environ.get("GEMINI_API_KEY")),
-        "bridge":    bool(os.environ.get("BRIDGE_API_KEY")),
-        "zillow":    bool(os.environ.get("ZILLOW_ZWSID")),
+        "anthropic":     bool(os.environ.get("ANTHROPIC_API_KEY")),
+        "openai":        bool(os.environ.get("OPENAI_API_KEY")),
+        "gemini":        bool(os.environ.get("GEMINI_API_KEY")),
+        "bridge":        bool(os.environ.get("BRIDGE_API_KEY")),
+        "zillow":        bool(os.environ.get("ZILLOW_ZWSID")),
+        "self_modify":   os.environ.get("DALLAS_SELF_MODIFY", "").lower() == "true",
     }
     return {"status": "ok", "keys": keys}
 
@@ -139,16 +143,18 @@ async def chat(req: ChatRequest):
     elapsed = int((time.time() - t0) * 1000)
 
     route = result.route
+    agent = route.agent_role if route else "executor"
     return ChatResponse(
         output=result.output,
         route_provider=route.provider if route else "anthropic",
         route_model=route.model if route else "claude-opus-4-6",
-        route_agent=route.agent_role if route else "executor",
+        route_agent=agent,
         verified=result.verified,
         verification_issues=result.verification_issues,
         consensus_score=round(result.consensus_score, 2),
         elapsed_ms=elapsed,
         notes=result.notes,
+        self_modified=agent == "self_modifier",
     )
 
 

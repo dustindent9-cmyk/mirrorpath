@@ -57,6 +57,13 @@
     {"name": "get_transaction_history", "module": "tools.zillow_public_client"},
     {"name": "get_listing_traffic", "module": "tools.zillow_reporting_client"},
     {"name": "get_leads",          "module": "tools.zillow_reporting_client"},
-    {"name": "get_agent_performance", "module": "tools.zillow_reporting_client"}
+    {"name": "get_agent_performance", "module": "tools.zillow_reporting_client"},
+    {"name": "read_source",        "module": "tools.self_modify"},
+    {"name": "list_source",        "module": "tools.self_modify"},
+    {"name": "patch_source",       "module": "tools.self_modify"},
+    {"name": "write_source",       "module": "tools.self_modify"},
+    {"name": "diff_source",        "module": "tools.self_modify"},
+    {"name": "git_diff",           "module": "tools.self_modify"},
+    {"name": "git_log",            "module": "tools.self_modify"}
   ]
 }

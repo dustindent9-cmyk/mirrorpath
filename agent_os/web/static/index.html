@@ -23,6 +23,8 @@
       --success:     #34d399;
       --warning:     #fbbf24;
       --error:       #f87171;
+      --self-mod:    #f97316;
+      --self-mod-dim: rgba(249, 115, 22, 0.15);
       --radius:      12px;
       --radius-sm:   8px;
       --font:        -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
@@ -287,6 +289,31 @@
     .meta-badge.provider   { color: #a78bfa; border-color: #a78bfa; }
     .meta-badge.agent      { color: #60a5fa; border-color: #60a5fa; }
     .meta-badge.time       { color: var(--text-muted); }
+    .meta-badge.self-mod   { color: var(--self-mod); border-color: var(--self-mod); background: var(--self-mod-dim); }
+
+    /* self-modification bubble gets an orange left border */
+    .msg-row.ai.self-modified .msg-bubble {
+      border-left: 3px solid var(--self-mod);
+      background: color-mix(in srgb, var(--surface) 92%, var(--self-mod) 8%);
+    }
+
+    /* diff block inside self-mod response */
+    .diff-block {
+      font-family: var(--mono);
+      font-size: 12px;
+      line-height: 1.55;
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      margin: 10px 0 0;
+      overflow-x: auto;
+      white-space: pre;
+    }
+
+    .diff-block .diff-add  { color: #86efac; }
+    .diff-block .diff-del  { color: #fca5a5; }
+    .diff-block .diff-meta { color: var(--text-muted); }
 
     /* typing indicator */
     .typing-indicator {
@@ -561,6 +588,9 @@
         <div class="suggestion" onclick="sendSuggestion(this)">
           <strong>Real estate</strong>Run comps for a 3/2 in Austin 78701
         </div>
+        <div class="suggestion" onclick="sendSuggestion(this)" style="border-color: var(--self-mod); opacity:0.85">
+          <strong style="color:var(--self-mod)">Modify yourself</strong>Update your routing to send all math questions to GPT-4o
+        </div>
       </div>
     </div>
   </div>
@@ -611,11 +641,12 @@
       const d = await r.json()
       const bar = document.getElementById("health-bar")
       bar.innerHTML = ""
-      const labels = { anthropic: "Claude", openai: "GPT-4o", gemini: "Gemini", bridge: "MLS", zillow: "Zillow" }
+      const labels = { anthropic: "Claude", openai: "GPT-4o", gemini: "Gemini", bridge: "MLS", zillow: "Zillow", self_modify: "Self-Mod" }
       for (const [k, v] of Object.entries(d.keys)) {
         const el = document.createElement("div")
         el.className = `health-dot ${v ? "ok" : "off"}`
         el.textContent = (v ? "● " : "○ ") + labels[k]
+        if (k === "self_modify" && v) el.style.color = "var(--self-mod)"
         bar.appendChild(el)
       }
     } catch {}
@@ -655,13 +686,14 @@
       removeTyping(typingId)
 
       const meta = {
-        provider: d.route_provider,
-        model:    d.route_model,
-        agent:    d.route_agent,
-        verified: d.verified,
-        issues:   d.verification_issues,
-        elapsed:  d.elapsed_ms,
-        score:    d.consensus_score,
+        provider:     d.route_provider,
+        model:        d.route_model,
+        agent:        d.route_agent,
+        verified:     d.verified,
+        issues:       d.verification_issues,
+        elapsed:      d.elapsed_ms,
+        score:        d.consensus_score,
+        self_modified: d.self_modified,
       }
 
       appendMessage("ai", d.output, meta)
@@ -694,7 +726,8 @@
     const container = document.getElementById("messages")
 
     const row = document.createElement("div")
-    row.className = `msg-row ${role}`
+    const selfMod = role === "ai" && meta && meta.self_modified
+    row.className = `msg-row ${role}${selfMod ? " self-modified" : ""}`
 
     const bubble = document.createElement("div")
     bubble.className = "msg-bubble"
@@ -714,21 +747,17 @@
     const div = document.createElement("div")
     div.className = "msg-meta"
 
-    const provBadge = badge(m.provider + " / " + m.model, "provider")
-    const agentBadge = badge("agent: " + m.agent, "agent")
-    const verBadge  = m.verified
-      ? badge("✓ verified", "verified")
-      : badge("⚠ unverified", "unverified")
-    const timeBadge  = badge(m.elapsed + "ms", "time")
+    if (m.self_modified) {
+      div.appendChild(badge("⚙ self-modified", "self-mod"))
+    }
 
-    div.appendChild(provBadge)
-    div.appendChild(agentBadge)
-    div.appendChild(verBadge)
-    div.appendChild(timeBadge)
+    div.appendChild(badge(m.provider + " / " + m.model, "provider"))
+    div.appendChild(badge("agent: " + m.agent, "agent"))
+    div.appendChild(m.verified ? badge("✓ verified", "verified") : badge("⚠ unverified", "unverified"))
+    div.appendChild(badge(m.elapsed + "ms", "time"))
 
     if (m.issues && m.issues.length > 0) {
-      const issueEl = badge("issues: " + m.issues.join(", "), "unverified")
-      div.appendChild(issueEl)
+      div.appendChild(badge("issues: " + m.issues.join(", "), "unverified"))
     }
 
     return div
@@ -742,9 +771,21 @@
   }
 
   function formatContent(text) {
-    // Very lightweight markdown: code blocks, inline code, bold
+    // fenced diff blocks — render with color coding
+    text = text.replace(/```diff\n([\s\S]*?)```/g, (_, diff) => {
+      const lines = diff.trimEnd().split("\n").map(line => {
+        const cls = line.startsWith("+") ? "diff-add"
+                  : line.startsWith("-") ? "diff-del"
+                  : line.startsWith("@@") ? "diff-meta" : ""
+        return cls
+          ? `<span class="${cls}">${escapeHtml(line)}</span>`
+          : escapeHtml(line)
+      })
+      return `<div class="diff-block">${lines.join("\n")}</div>`
+    })
+
     let s = escapeHtml(text)
-    // fenced code blocks
+    // fenced code blocks (non-diff)
     s = s.replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) =>
       `<pre><code>${code.trimEnd()}</code></pre>`)
     // inline code

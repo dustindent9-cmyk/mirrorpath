@@ -10,13 +10,15 @@
     "executor":      "claude-sonnet-4-6",
     "memory_agent":  "claude-haiku-4-5",
     "user_advocate": "claude-sonnet-4-6",
-    "browser_agent": "claude-sonnet-4-6"
+    "browser_agent":  "claude-sonnet-4-6",
+    "self_modifier":  "claude-opus-4-6"
   },
   "thinking": {
-    "planner":  {"type": "adaptive"},
-    "coder":    {"type": "adaptive"},
-    "critic":   {"type": "adaptive"},
-    "default":  {"type": "adaptive"}
+    "planner":       {"type": "adaptive"},
+    "coder":         {"type": "adaptive"},
+    "critic":        {"type": "adaptive"},
+    "self_modifier": {"type": "adaptive"},
+    "default":       {"type": "adaptive"}
   },
   "max_tokens": {
     "default": 16000,
