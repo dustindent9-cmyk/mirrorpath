@@ -41,15 +41,16 @@ self.addEventListener("fetch", e => {
     return
   }
 
-  // Cache-first for everything else (static assets)
+  // Cache-first for GET static assets only
+  if (e.request.method !== "GET") return
+
   e.respondWith(
     caches.match(e.request).then(cached => {
       if (cached) return cached
       return fetch(e.request).then(res => {
-        // Cache valid responses
         if (res && res.status === 200 && res.type === "basic") {
           const clone = res.clone()
-          caches.open(CACHE).then(c => c.put(e.request, clone))
+          e.waitUntil(caches.open(CACHE).then(c => c.put(e.request, clone)))
         }
         return res
       })

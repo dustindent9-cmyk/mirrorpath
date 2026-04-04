@@ -38,11 +38,19 @@ from tools.memory_store import read_memory, remember_conversation_summary
 # ── App setup ─────────────────────────────────────────────────────────────────
 app = FastAPI(title="Dallas", description="Personal AI Assistant", version="1.0.0")
 
+import logging
+log = logging.getLogger("dallas")
+
+_cors_origins = [
+    o.strip()
+    for o in os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:8080,http://127.0.0.1:8080").split(",")
+    if o.strip()
+]
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=_cors_origins,
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type"],
 )
 
 # Mount static files
@@ -78,8 +86,7 @@ def get_engine() -> Engine:
                 "self_modifier": SelfModifierAgent(),
             })
         except Exception as e:
-            # Agents optional — engine still routes via providers
-            pass
+            log.warning("Agent registration failed (partial setup): %s", e, exc_info=True)
     return _engine
 
 
