@@ -2,9 +2,9 @@
 Dallas dev server — starts uvicorn with auto-reload.
 
 Usage:
-    python run.py              # default: port 8000
+    python run.py              # default: port 8080
     python run.py --port 3000  # custom port
-    python run.py --host 0.0.0.0 --port 8000  # expose on network (phone access)
+    python run.py --host 0.0.0.0 --port 8080  # expose on network (phone access)
     python run.py --no-reload  # disable auto-reload (production)
 """
 import argparse

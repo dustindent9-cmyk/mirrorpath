@@ -33,7 +33,7 @@ from .contracts import AgentInput, AgentOutput, SessionResult
 @dataclass
 class EngineResult:
     task:           str
-    output:         str
+    output:         str = ""
     route:          RouteDecision | None = None
     agent_results:  list[AgentResult] = field(default_factory=list)
     verified:       bool = False

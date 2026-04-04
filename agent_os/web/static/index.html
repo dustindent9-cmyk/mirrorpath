@@ -13,7 +13,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Dallas" />
-  <link rel="apple-touch-icon" href="/static/icon-192.svg" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/static/icon-180.png" />
 
   <!-- Android -->
   <meta name="mobile-web-app-capable" content="yes" />
@@ -809,28 +809,28 @@
   }
 
   function formatContent(text) {
-    // fenced diff blocks — render with color coding
-    text = text.replace(/```diff\n([\s\S]*?)```/g, (_, diff) => {
+    // Escape first, then inject safe HTML — prevents XSS from AI output
+    let s = escapeHtml(text)
+
+    // Diff blocks: content is already escaped, apply color spans (no re-escaping needed)
+    s = s.replace(/```diff\n([\s\S]*?)```/g, (_, diff) => {
       const lines = diff.trimEnd().split("\n").map(line => {
         const cls = line.startsWith("+") ? "diff-add"
                   : line.startsWith("-") ? "diff-del"
                   : line.startsWith("@@") ? "diff-meta" : ""
-        return cls
-          ? `<span class="${cls}">${escapeHtml(line)}</span>`
-          : escapeHtml(line)
+        return cls ? `<span class="${cls}">${line}</span>` : line
       })
       return `<div class="diff-block">${lines.join("\n")}</div>`
     })
 
-    let s = escapeHtml(text)
-    // fenced code blocks (non-diff)
-    s = s.replace(/```(\w*)\n([\s\S]*?)```/g, (_, lang, code) =>
+    // Fenced code blocks (non-diff)
+    s = s.replace(/```\w*\n([\s\S]*?)```/g, (_, code) =>
       `<pre><code>${code.trimEnd()}</code></pre>`)
-    // inline code
+    // Inline code
     s = s.replace(/`([^`]+)`/g, (_, c) => `<code>${c}</code>`)
-    // bold
+    // Bold
     s = s.replace(/\*\*(.+?)\*\*/g, "<strong>$1</strong>")
-    // line breaks → paragraphs
+    // Paragraphs
     s = s.split(/\n\n+/).map(p => `<p>${p.replace(/\n/g, "<br>")}</p>`).join("")
     return s
   }

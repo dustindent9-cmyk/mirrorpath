@@ -26,6 +26,8 @@ sys.path.insert(0, str(ROOT))
 from dotenv import load_dotenv
 load_dotenv(ROOT / ".env")
 
+import logging
+
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.responses import HTMLResponse, JSONResponse, StreamingResponse
 from fastapi.staticfiles import StaticFiles
@@ -35,14 +37,23 @@ from pydantic import BaseModel
 from orchestrator.engine import Engine, EngineResult
 from tools.memory_store import read_memory, remember_conversation_summary
 
+log = logging.getLogger("dallas")
+
 # ── App setup ─────────────────────────────────────────────────────────────────
 app = FastAPI(title="Dallas", description="Personal AI Assistant", version="1.0.0")
 
+# CORS — restrict origins via env var in production; defaults to localhost only
+_cors_origins = [
+    o.strip()
+    for o in os.getenv("CORS_ALLOWED_ORIGINS", "http://localhost:8080,http://127.0.0.1:8080").split(",")
+    if o.strip()
+]
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_origins=_cors_origins,
+    allow_methods=["GET", "POST"],
+    allow_headers=["Content-Type"],
 )
 
 # Mount static files
@@ -78,8 +89,9 @@ def get_engine() -> Engine:
                 "self_modifier": SelfModifierAgent(),
             })
         except Exception as e:
-            # Agents optional — engine still routes via providers
-            pass
+            # Agents are optional — engine still routes via providers directly.
+            # Log so failures are visible without crashing the server.
+            log.warning("Agent registration failed (partial setup): %s", e, exc_info=True)
     return _engine
 
 

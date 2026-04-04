@@ -43,7 +43,8 @@ def _safe_path(rel_path: str) -> Path:
     escape the root. Raises ValueError if path is outside agent_os/.
     """
     p = (_ROOT / rel_path).resolve()
-    if not str(p).startswith(str(_ROOT)):
+    # Use is_relative_to (Py 3.9+) — immune to prefix tricks like /repo/agent_os_evil/
+    if not p.is_relative_to(_ROOT):
         raise ValueError(f"Path '{rel_path}' escapes the agent_os directory.")
     if rel_path in _PROTECTED or p.name in {Path(x).name for x in _PROTECTED}:
         raise PermissionError(f"'{rel_path}' is a protected file and cannot be modified.")

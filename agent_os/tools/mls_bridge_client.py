@@ -31,6 +31,11 @@ _DATASET  = os.getenv("BRIDGE_DATASET", "")
 _BASE_URL = "https://api.bridgedataoutput.com/api/v2"
 
 
+def _odata_escape(value: str) -> str:
+    """Escape a string value for OData $filter (single quote → doubled quote)."""
+    return value.replace("'", "''")
+
+
 # ── Low-level HTTP ───────────────────────────────────────────────────────────
 
 @retry(stop=stop_after_attempt(3), wait=wait_exponential(min=1, max=8))
@@ -137,13 +142,13 @@ def get_active_listings(
 ) -> list[Property]:
     """Fetch active MLS listings with optional filters."""
     filters: list[str] = [
-        f"StandardStatus eq 'Active'",
-        f"PropertyType eq '{property_type}'",
+        "StandardStatus eq 'Active'",
+        f"PropertyType eq '{_odata_escape(property_type)}'",
     ]
     if city:
-        filters.append(f"City eq '{city}'")
+        filters.append(f"City eq '{_odata_escape(city)}'")
     if postal_code:
-        filters.append(f"PostalCode eq '{postal_code}'")
+        filters.append(f"PostalCode eq '{_odata_escape(postal_code)}'")
     if min_price:
         filters.append(f"ListPrice ge {min_price}")
     if max_price:
@@ -179,9 +184,9 @@ def get_sold_listings(
         "PropertyType eq 'Residential'",
     ]
     if city:
-        filters.append(f"City eq '{city}'")
+        filters.append(f"City eq '{_odata_escape(city)}'")
     if postal_code:
-        filters.append(f"PostalCode eq '{postal_code}'")
+        filters.append(f"PostalCode eq '{_odata_escape(postal_code)}'")
     if min_price:
         filters.append(f"ClosePrice ge {min_price}")
     if max_price:

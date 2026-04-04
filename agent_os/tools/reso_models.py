@@ -129,6 +129,7 @@ class Property(BaseModel):
     original_list_price: float | None = Field(None, alias="OriginalListPrice")
     close_price:        float | None = Field(None, alias="ClosePrice")
     price_per_sqft:     float | None = None  # computed
+    distance_miles:     float | None = None  # set by comps engine
 
     # Dates
     listing_contract_date: date | None = Field(None, alias="ListingContractDate")
