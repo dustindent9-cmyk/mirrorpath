@@ -121,15 +121,36 @@ async def index():
 
 @app.get("/api/health")
 async def health():
-    keys = {
-        "anthropic":     bool(os.environ.get("ANTHROPIC_API_KEY")),
-        "openai":        bool(os.environ.get("OPENAI_API_KEY")),
-        "gemini":        bool(os.environ.get("GEMINI_API_KEY")),
-        "bridge":        bool(os.environ.get("BRIDGE_API_KEY")),
-        "zillow":        bool(os.environ.get("ZILLOW_ZWSID")),
-        "self_modify":   os.environ.get("DALLAS_SELF_MODIFY", "").lower() == "true",
+    import requests as _requests
+
+    keys: dict = {
+        "openai":      bool(os.environ.get("OPENAI_API_KEY")),
+        "gemini":      bool(os.environ.get("GEMINI_API_KEY")),
+        "bridge":      bool(os.environ.get("BRIDGE_API_KEY")),
+        "zillow":      bool(os.environ.get("ZILLOW_ZWSID")),
+        "self_modify": os.environ.get("DALLAS_SELF_MODIFY", "").lower() == "true",
     }
-    return {"status": "ok", "keys": keys}
+
+    # Live-test the Anthropic key against the models endpoint
+    anthropic_key = os.environ.get("ANTHROPIC_API_KEY", "")
+    if anthropic_key:
+        try:
+            r = _requests.get(
+                "https://api.anthropic.com/v1/models",
+                headers={
+                    "x-api-key": anthropic_key,
+                    "anthropic-version": "2023-06-01",
+                },
+                timeout=5,
+            )
+            keys["anthropic"] = r.status_code == 200
+        except Exception:
+            keys["anthropic"] = False
+    else:
+        keys["anthropic"] = False
+
+    status = "ok" if keys["anthropic"] else "no_anthropic_key"
+    return {"status": status, "keys": keys}
 
 
 @app.post("/api/chat", response_model=ChatResponse)
