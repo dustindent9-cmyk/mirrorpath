@@ -12,7 +12,7 @@ import uvicorn
 
 parser = argparse.ArgumentParser(description="Run the Dallas web server")
 parser.add_argument("--host",     default="127.0.0.1", help="Host to bind (default: 127.0.0.1)")
-parser.add_argument("--port",     default=8000, type=int, help="Port to listen on (default: 8000)")
+parser.add_argument("--port",     default=8080, type=int, help="Port to listen on (default: 8080)")
 parser.add_argument("--no-reload", action="store_true",  help="Disable auto-reload")
 args = parser.parse_args()
 
