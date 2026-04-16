@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dallas Copilot — Settings</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:         #0f1117;
+      --surface:    #1e2029;
+      --surface2:   #262830;
+      --border:     #2e3040;
+      --text:       #e8eaf0;
+      --text-muted: #8b8fa8;
+      --accent:     #6c63ff;
+      --success:    #34d399;
+      --error:      #f87171;
+      --radius:     12px;
+      --radius-sm:  8px;
+      --font:       -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+      --mono:       "SF Mono", "Fira Code", Consolas, monospace;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      font-size: 14px;
+      line-height: 1.55;
+      padding: 28px 32px 40px;
+      max-width: 520px;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo-icon {
+      width: 34px;
+      height: 34px;
+      background: var(--accent);
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 17px;
+      box-shadow: 0 0 16px rgba(108,99,255,.25);
+    }
+
+    .logo-name { font-size: 17px; font-weight: 700; }
+    .logo-sub  { font-size: 11px; color: var(--text-muted); }
+
+    .section { margin-bottom: 24px; }
+
+    .section-title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.6px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 10px;
+    }
+
+    .field { margin-bottom: 14px; }
+
+    label {
+      display: block;
+      font-size: 13px;
+      color: var(--text);
+      margin-bottom: 5px;
+    }
+
+    .label-hint {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-left: 6px;
+    }
+
+    input[type="text"],
+    input[type="url"] {
+      width: 100%;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 13px;
+      padding: 9px 12px;
+      outline: none;
+      transition: border-color 0.15s;
+    }
+
+    input[type="text"]:focus,
+    input[type="url"]:focus { border-color: var(--accent); }
+
+    .field-hint {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 5px;
+      line-height: 1.4;
+    }
+
+    .btn-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 9px 20px;
+      border-radius: var(--radius-sm);
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 500;
+      cursor: pointer;
+      border: none;
+      transition: background 0.15s, opacity 0.15s;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+    .btn-primary:hover { background: #5a52e0; }
+
+    .btn-secondary {
+      background: var(--surface2);
+      color: var(--text);
+      border: 1px solid var(--border);
+    }
+    .btn-secondary:hover { background: var(--surface); }
+
+    .status-msg {
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      display: none;
+    }
+    .status-msg.ok    { background: rgba(52,211,153,.12); color: var(--success); display: block; }
+    .status-msg.error { background: rgba(248,113,113,.12); color: var(--error);   display: block; }
+
+    .shortcuts-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    .shortcuts-table th,
+    .shortcuts-table td {
+      padding: 8px 10px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+
+    .shortcuts-table th {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    kbd {
+      display: inline-block;
+      padding: 2px 7px;
+      border: 1px solid var(--border);
+      border-radius: 5px;
+      font-family: var(--mono);
+      font-size: 11px;
+      background: var(--surface2);
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover { text-decoration: underline; }
+
+    .version {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 32px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <div class="logo-icon">✦</div>
+    <div>
+      <div class="logo-name">Dallas Copilot</div>
+      <div class="logo-sub">Extension Settings</div>
+    </div>
+  </div>
+
+  <!-- Backend URL -->
+  <div class="section">
+    <div class="section-title">Backend</div>
+
+    <div class="field">
+      <label for="base-url">
+        Dallas Server URL
+        <span class="label-hint">— where the Dallas backend is running</span>
+      </label>
+      <input type="url" id="base-url" placeholder="http://localhost:8000" spellcheck="false" />
+      <div class="field-hint">
+        Default: <code>http://localhost:8000</code> (local). Use your Railway / hosted URL for a deployed instance.
+      </div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn-primary" id="btn-save">Save</button>
+      <button class="btn-secondary" id="btn-test">Test Connection</button>
+      <div class="status-msg" id="status-msg"></div>
+    </div>
+  </div>
+
+  <!-- Keyboard shortcuts -->
+  <div class="section">
+    <div class="section-title">Keyboard Shortcuts</div>
+    <table class="shortcuts-table">
+      <thead>
+        <tr><th>Action</th><th>Default shortcut</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Open Dallas Copilot</td>
+          <td><kbd>Alt+D</kbd></td>
+        </tr>
+        <tr>
+          <td>Start new chat</td>
+          <td><kbd>Alt+Shift+D</kbd></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="field-hint" style="margin-top:8px;">
+      Reassign via
+      <a href="chrome://extensions/shortcuts" target="_blank">chrome://extensions/shortcuts</a>.
+    </div>
+  </div>
+
+  <div class="version" id="version-line">Dallas Copilot v1.0.0</div>
+
+  <script src="options.js"></script>
+</body>
+</html>

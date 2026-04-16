@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dallas Copilot</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo">
+      <div class="logo-icon">✦</div>
+      <div>
+        <div class="logo-name">Dallas</div>
+        <div class="logo-sub">Personal AI</div>
+      </div>
+    </div>
+    <div class="header-actions">
+      <button class="icon-btn" id="btn-new-chat" title="New chat (Alt+Shift+D)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/>
+        </svg>
+      </button>
+      <button class="icon-btn" id="btn-settings" title="Settings">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="3"/>
+          <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- Status bar -->
+  <div class="status-bar" id="status-bar">
+    <span class="status-dot" id="status-dot"></span>
+    <span id="status-text">Connecting…</span>
+  </div>
+
+  <!-- Messages -->
+  <main class="messages" id="messages">
+    <div class="welcome" id="welcome">
+      <div class="welcome-icon">✦</div>
+      <div class="welcome-title">How can I help?</div>
+      <div class="welcome-sub">Ask anything. Press <kbd>Alt+D</kbd> to open me anytime.</div>
+    </div>
+  </main>
+
+  <!-- Input area -->
+  <footer class="input-area">
+    <div class="input-row">
+      <textarea
+        id="input"
+        class="input"
+        placeholder="Message Dallas…"
+        rows="1"
+        autocomplete="off"
+        spellcheck="true"
+      ></textarea>
+      <button class="send-btn" id="btn-send" title="Send (Enter)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="input-hint">Enter to send · Shift+Enter for new line</div>
+  </footer>
+
+  <!-- Route badge (shown after AI reply) -->
+  <div class="route-badge hidden" id="route-badge"></div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
