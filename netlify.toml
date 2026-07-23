@@ -1,0 +1,16 @@
+# mirrorpathai.com — static site (index.html)
+[build]
+  publish = "."
+
+# Stripe return path used by the commitment flow
+[[redirects]]
+  from = "/start"
+  to = "/index.html"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
