@@ -4,314 +4,160 @@
 <meta charset="UTF-8" />
 <title>Mirror Path AI — The Man in the Mirror</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta name="description" content="Mirror Path AI — a 90-day public path of honesty, discipline, and daily accountability. Growth only. Business tools stay private." />
-
+<meta name="description" content="Mirror Path AI — a 90-day path of honesty, discipline, and daily accountability. Clear speech. Real structure. Fair pricing." />
 <style>
 :root{
-  --bg:#000;
-  --panel:#0b0b0b;
-  --panel2:#141414;
-  --border:#2a2a2a;
-  --text:#fff;
-  --muted:#a8a8a8;
-  --accent:#fff;
-  --danger:#ff4d4d;
+  --bg:#000; --panel:#0b0b0b; --panel2:#141414; --border:#2a2a2a;
+  --text:#fff; --muted:#a8a8a8; --accent:#fff; --gold:#d4af77; --danger:#ff4d4d;
 }
-
 *{box-sizing:border-box}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--text);
-  font-family:Segoe UI, system-ui, -apple-system, Arial, sans-serif;
-  overflow:hidden;
-}
-.hidden{display:none !important;}
-
-.screen{
-  min-height:100vh;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:24px;
-}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Segoe UI,system-ui,-apple-system,Arial,sans-serif;overflow:hidden}
+.hidden{display:none !important}
+.screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:24px}
 .card{
-  max-width:1000px;
-  width:100%;
-  background:rgba(0,0,0,.78);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:26px 22px;
-  box-shadow:0 18px 70px rgba(0,0,0,.55);
+  max-width:1000px;width:100%;background:rgba(0,0,0,.82);border:1px solid var(--border);
+  border-radius:16px;padding:26px 22px;box-shadow:0 18px 70px rgba(0,0,0,.55)
 }
 h1,h2,h3{margin:0 0 10px 0}
-p{margin:0 0 10px 0;color:var(--muted);line-height:1.6}
+p{margin:0 0 10px 0;color:var(--muted);line-height:1.65}
 small{color:var(--muted)}
 hr{border:none;border-top:1px solid var(--border);margin:16px 0}
-
 .btn{
-  appearance:none;
-  border:none;
-  border-radius:12px;
-  padding:14px 18px;
-  font-weight:900;
-  letter-spacing:.3px;
-  cursor:pointer;
-  background:var(--accent);
-  color:#000;
+  appearance:none;border:none;border-radius:12px;padding:14px 18px;font-weight:900;
+  letter-spacing:.3px;cursor:pointer;background:var(--accent);color:#000
 }
 .btn:active{transform:translateY(1px)}
-.btn.secondary{
-  background:transparent;
-  color:var(--accent);
-  border:1px solid var(--border);
-}
-.btnRow{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  margin-top:12px;
-}
+.btn.secondary{background:transparent;color:var(--accent);border:1px solid var(--border)}
+.btn.gold{background:var(--gold);color:#000}
+.btnRow{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
 @media(max-width:560px){.btnRow .btn{width:100%}}
-
-input,textarea{
-  width:100%;
-  background:#050505;
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:11px 12px;
-  margin:8px 0;
-  color:var(--text);
-  font-size:.96rem;
+input,textarea,select{
+  width:100%;background:#050505;border:1px solid var(--border);border-radius:12px;
+  padding:11px 12px;margin:8px 0;color:var(--text);font-size:.96rem
 }
-textarea{
-  background:var(--panel2);
-  min-height:110px;
-  resize:none;
-}
-
-.grid2{
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:12px;
-}
+textarea{background:var(--panel2);min-height:100px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 @media(max-width:780px){.grid2{grid-template-columns:1fr}}
-
 .notice{
-  background:rgba(255,255,255,0.04);
-  border:1px solid var(--border);
-  border-radius:14px;
-  padding:14px 14px;
-  color:var(--muted);
-  white-space:pre-line;
+  background:rgba(255,255,255,0.04);border:1px solid var(--border);border-radius:14px;
+  padding:14px;color:var(--muted);white-space:pre-line;line-height:1.7
 }
 .badge{
-  display:inline-block;
-  border-radius:999px;
-  border:1px solid var(--border);
-  padding:6px 10px;
-  font-size:.85rem;
-  color:var(--muted);
+  display:inline-block;border-radius:999px;border:1px solid var(--border);
+  padding:6px 10px;font-size:.85rem;color:var(--muted)
 }
 .danger{color:var(--danger);font-weight:900}
-
-/* Intro typing */
-#introText{
-  margin-top:14px;
-  white-space:pre-line;
-  min-height:260px;
-  font-size:1.05rem;
-  line-height:1.65;
+.gold{color:var(--gold)}
+#introText{margin-top:14px;white-space:pre-line;min-height:240px;font-size:1.08rem;line-height:1.75}
+.q-block{margin:18px 0;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.06)}
+.q-label{font-weight:800;color:var(--text);margin-bottom:4px}
+.q-help{font-size:.9rem;color:var(--muted);margin-bottom:6px;line-height:1.5}
+.tier-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:14px}
+@media(max-width:900px){.tier-grid{grid-template-columns:1fr}}
+.tier{
+  border:1px solid var(--border);border-radius:14px;padding:16px;background:rgba(255,255,255,.02)
 }
-
-/* App layout */
-#mainApp{display:flex;height:100vh;overflow:hidden;}
+.tier.featured{border-color:var(--gold);box-shadow:0 0 0 1px rgba(212,175,119,.25)}
+.tier h3{color:var(--text)}
+.tier .price{font-size:1.6rem;font-weight:900;color:var(--gold);margin:8px 0}
+.tier ul{margin:8px 0 0 18px;color:var(--muted);padding:0;font-size:.9rem;line-height:1.5}
+#mainApp{display:flex;height:100vh;overflow:hidden}
 nav{
-  width:260px;
-  height:100vh;
-  position:fixed;
-  padding:22px 16px;
-  border-right:1px solid var(--border);
-  background:rgba(0,0,0,.82);
-  backdrop-filter:blur(10px);
+  width:270px;height:100vh;position:fixed;padding:22px 16px;border-right:1px solid var(--border);
+  background:rgba(0,0,0,.88);backdrop-filter:blur(10px);overflow:auto
 }
-.logo{
-  font-weight:900;
-  letter-spacing:3px;
-  text-transform:uppercase;
-  margin-bottom:18px;
-  font-size:1.05rem;
-}
+.logo{font-weight:900;letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;font-size:1.02rem}
+.logo-sub{font-size:.75rem;color:var(--muted);margin-bottom:16px;line-height:1.4}
 nav ul{list-style:none;margin:0;padding:0}
 nav li{
-  padding:11px 10px;
-  border-radius:12px;
-  cursor:pointer;
-  color:var(--muted);
-  transition:.2s;
+  padding:11px 10px;border-radius:12px;cursor:pointer;color:var(--muted);transition:.2s;font-size:.95rem
 }
 nav li:hover{background:rgba(255,255,255,0.04);color:var(--text)}
 nav li.active{background:rgba(255,255,255,0.08);color:var(--text)}
-main{
-  margin-left:260px;
-  width:calc(100% - 260px);
-  height:100vh;
-  overflow:auto;
-  padding:22px 18px;
-}
-.section{display:none;max-width:1050px;margin:0 auto;}
-.section.active{display:block;}
+nav .group{font-size:.7rem;letter-spacing:1.5px;text-transform:uppercase;color:#555;margin:14px 4px 6px}
+main{margin-left:270px;width:calc(100% - 270px);height:100vh;overflow:auto;padding:22px 18px}
+.section{display:none;max-width:1050px;margin:0 auto}
+.section.active{display:block}
 .panel{
-  background:rgba(0,0,0,.6);
-  border:1px solid var(--border);
-  border-radius:16px;
-  padding:18px;
+  background:rgba(0,0,0,.6);border:1px solid var(--border);border-radius:16px;padding:18px
 }
-.quote{
-  font-style:italic;
-  color:var(--muted);
-  margin:10px 0;
-}
-.path-grid{
-  display:grid;
-  grid-template-columns:repeat(10,1fr);
-  gap:7px;
-  margin-top:14px;
-}
+.quote{font-style:italic;color:var(--muted);margin:10px 0}
+.path-grid{display:grid;grid-template-columns:repeat(10,1fr);gap:7px;margin-top:14px}
 @media(max-width:900px){.path-grid{grid-template-columns:repeat(7,1fr)}}
 @media(max-width:520px){.path-grid{grid-template-columns:repeat(5,1fr)}}
 .day{
-  aspect-ratio:1;
-  border-radius:10px;
-  border:1px solid var(--border);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  cursor:pointer;
-  font-size:.8rem;
-  background:rgba(255,255,255,0.02);
+  aspect-ratio:1;border-radius:10px;border:1px solid var(--border);display:flex;align-items:center;
+  justify-content:center;cursor:pointer;font-size:.8rem;background:rgba(255,255,255,0.02)
 }
-.day.done{
-  background:var(--accent);
-  color:#000;
-  border-color:var(--accent);
+.day.done{background:var(--accent);color:#000;border-color:var(--accent)}
+.path-cards{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+@media(max-width:780px){.path-cards{grid-template-columns:1fr}}
+.path-card{border:1px solid var(--border);border-radius:14px;padding:16px;background:rgba(255,255,255,.03);cursor:pointer}
+.path-card:hover{border-color:#555}
+.path-card h3{margin:0 0 6px;color:var(--gold)}
+.modalBack{
+  position:fixed;inset:0;background:rgba(0,0,0,.78);display:flex;align-items:center;justify-content:center;
+  padding:18px;z-index:50;overflow:auto
 }
-
-/* APEX owner zone */
+.modal{
+  max-width:920px;width:100%;background:#050505;border-radius:16px;border:1px solid var(--border);
+  padding:20px;max-height:85vh;overflow:auto
+}
+.modal p{white-space:pre-line}
 .apex-badge{
-  display:none;
-  margin-top:12px;
-  font-size:.72rem;
-  letter-spacing:1.5px;
-  text-transform:uppercase;
-  color:var(--muted);
-  border:1px solid var(--border);
-  border-radius:8px;
-  padding:6px 8px;
-  cursor:pointer;
-  text-align:center;
+  display:none;margin-top:12px;font-size:.72rem;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--muted);border:1px solid var(--border);border-radius:8px;padding:6px 8px;cursor:pointer;text-align:center
 }
 .apex-badge.visible{display:block}
-.apex-badge:hover{color:var(--text);border-color:#555}
+.apex-badge:hover,.apex-badge.active{color:var(--text);border-color:#555}
 .apex-row{
-  display:grid;
-  grid-template-columns:1fr auto;
-  gap:10px;
-  align-items:start;
-  padding:12px;
-  border:1px solid var(--border);
-  border-radius:12px;
-  margin-bottom:8px;
-  background:rgba(255,255,255,0.02);
+  display:grid;grid-template-columns:1fr auto;gap:10px;align-items:start;padding:12px;
+  border:1px solid var(--border);border-radius:12px;margin-bottom:8px;background:rgba(255,255,255,0.02)
 }
-.apex-row strong{display:block;margin-bottom:4px}
 .apex-meta{font-size:.85rem;color:var(--muted)}
 .apex-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0}
 .apex-tabs button{
-  background:transparent;
-  color:var(--muted);
-  border:1px solid var(--border);
-  border-radius:999px;
-  padding:8px 12px;
-  cursor:pointer;
-  font-weight:700;
-  font-size:.85rem;
+  background:transparent;color:var(--muted);border:1px solid var(--border);border-radius:999px;
+  padding:8px 12px;cursor:pointer;font-weight:700;font-size:.85rem
 }
 .apex-tabs button.active{background:var(--accent);color:#000;border-color:var(--accent)}
 .apex-panel{display:none}
 .apex-panel.active{display:block}
-.owner-hint{
-  position:fixed;
-  bottom:10px;
-  right:12px;
-  font-size:.7rem;
-  color:#333;
-  cursor:pointer;
-  z-index:40;
-  user-select:none;
-  letter-spacing:2px;
-}
+.owner-hint{position:fixed;bottom:10px;right:12px;font-size:.7rem;color:#333;cursor:pointer;z-index:40;letter-spacing:2px}
 .owner-hint:hover{color:#666}
-
-/* Modal */
-.modalBack{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,.78);
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:18px;
-  z-index:50;
-  overflow:auto;
+.voice-bar{
+  position:fixed;top:12px;right:12px;z-index:60;display:flex;gap:8px;align-items:center
 }
-.modal{
-  max-width:920px;
-  width:100%;
-  background:#050505;
-  border-radius:16px;
-  border:1px solid var(--border);
-  padding:20px;
-  max-height:85vh;
-  overflow:auto;
+.voice-bar button{
+  background:rgba(0,0,0,.7);color:var(--gold);border:1px solid var(--border);border-radius:10px;
+  padding:8px 12px;cursor:pointer;font-size:.85rem
 }
-.modal p{white-space:pre-line;}
-
-/* Mobile layout: move nav to top */
 @media(max-width:780px){
-  #mainApp{
-    flex-direction:column;
-    height:100vh;
-  }
-  nav{
-    position:relative;
-    width:100%;
-    height:auto;
-    border-right:none;
-    border-bottom:1px solid var(--border);
-  }
-  main{
-    margin-left:0;
-    width:100%;
-    height:calc(100vh - 70px);
-  }
+  #mainApp{flex-direction:column;height:100vh}
+  nav{position:relative;width:100%;height:auto;border-right:none;border-bottom:1px solid var(--border)}
+  main{margin-left:0;width:100%;height:calc(100vh - 120px)}
 }
 </style>
 </head>
 <body>
 
-<!-- HERO / CLICK GATE -->
+<div class="voice-bar">
+  <button type="button" id="muteBtn" onclick="toggleMute()" title="Voice">🔊 Voice On</button>
+</div>
+
+<!-- HERO -->
 <div id="hero" class="screen">
   <div class="card" style="text-align:center;">
-    <h1 style="letter-spacing:4px;text-transform:uppercase;">MIRROR PATH AI</h1>
-    <p>A 90-day path for the world: honesty, discipline, daily accountability.<br>
-    <span style="color:var(--text);opacity:.85">Growth only — not a CRM, not a sales funnel.</span></p>
-    <p>Tap begin. The voice starts after your click.</p>
+    <h1 style="letter-spacing:4px;text-transform:uppercase;">Mirror Path AI</h1>
+    <p class="gold" style="font-size:1.05rem;margin-top:8px;">The man in the mirror is waiting for a decision.</p>
+    <p>Ninety days of honesty, structure, and daily accountability.<br>
+    Growth for the world. Clear speech. A life operating system you can actually use.</p>
+    <p>Tap begin. A real voice will speak — not a sales pitch.</p>
     <div class="btnRow" style="justify-content:center;">
-      <button class="btn" id="beginBtn">Begin</button>
+      <button class="btn gold" id="beginBtn">Begin the Path</button>
       <button class="btn secondary" id="resetBtn">Reset</button>
     </div>
-    <small style="display:block;margin-top:10px;">If audio doesn’t play, the text will still appear.</small>
+    <small style="display:block;margin-top:12px;">If audio is blocked, the words still appear on screen.</small>
   </div>
 </div>
 
@@ -319,13 +165,15 @@ main{
 <div id="intro" class="screen hidden">
   <div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
-      <h2 style="margin:0;">The Man in the Mirror</h2>
+      <h2 style="margin:0;">The Opening Word</h2>
       <span class="badge" id="stageBadge">Stage: Intro</span>
     </div>
-    <div id="introText"></div>
+    <p>Listen first. This is the foundation — said plain so anyone can understand.</p>
+    <div id="introText" class="notice" style="min-height:260px;"></div>
     <div class="btnRow">
-      <button class="btn secondary" onclick="skipIntro()">Skip</button>
-      <button class="btn secondary" onclick="resetAll()">Reset</button>
+      <button class="btn secondary" onclick="replayIntro()">Replay Voice</button>
+      <button class="btn secondary" onclick="skipIntro()">Skip to Questions</button>
+      <button class="btn" id="introContinueBtn" onclick="finishIntro()">Continue</button>
     </div>
   </div>
 </div>
@@ -337,265 +185,419 @@ main{
       <h2 style="margin:0;">Look in the Mirror</h2>
       <span class="badge">Stage: Questions</span>
     </div>
-    <p>Answer directly. No performance. No excuses.</p>
+    <p>Each question is explained. Answer like you would if no one else would ever read it — because the system is built from your truth, not your performance.</p>
     <hr>
-    <input id="name" placeholder="Your name (first is fine)">
-    <input id="q_now" placeholder="Who are you right now—honestly?">
-    <input id="q_want" placeholder="Who must you become over the next 90 days?">
-    <input id="q_why" placeholder="What has stopped you until now?">
-    <input id="q_cost" placeholder="What is your current life costing you?">
-    <input id="q_focus" placeholder="One habit you will build. One habit you will break.">
-    <input id="q_ready" type="number" min="1" max="10" placeholder="How ready are you to change (1–10)?">
+
+    <div class="q-block">
+      <div class="q-label">1. Your name</div>
+      <div class="q-help">What should the Mirror call you? First name is enough. This is how your daily speeches will address you.</div>
+      <input id="name" placeholder="Example: Dustin">
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">2. Who are you right now — honestly?</div>
+      <div class="q-help">Not your resume. Not who you pretend to be on social media. The plain truth of your current season — strengths, mess, and all. Example: “I’m a hard worker who keeps restarting and never finishing.”</div>
+      <textarea id="q_now" placeholder="Write the honest version of who you are today..."></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">3. Who must you become in the next 90 days?</div>
+      <div class="q-help">This is your “better self” — the polished, disciplined man or woman you are building. Be specific. Example: “A man who wakes on time, keeps his word, trains his body, and leads his house with calm strength.”</div>
+      <textarea id="q_want" placeholder="Describe the person you are deciding to become..."></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">4. What has stopped you until now?</div>
+      <div class="q-help">Name the real blocker — fear, comfort, chaos, addiction to distraction, no plan, wrong friends, no accountability. If you won’t name it, it will keep running your life.</div>
+      <textarea id="q_why" placeholder="What has kept the old version in charge?"></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">5. What is your current life costing you?</div>
+      <div class="q-help">Cost can be money, health, respect, peace, family trust, or years. We need the price of staying the same so change feels worth it.</div>
+      <textarea id="q_cost" placeholder="What do you keep losing by drifting?"></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">6. One habit to build. One habit to break.</div>
+      <div class="q-help">Keep it small and daily. One build + one break beats ten vague goals. Example: “Build: morning journal. Break: late-night scrolling.”</div>
+      <textarea id="q_focus" placeholder="Build: ___   Break: ___"></textarea>
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">7. Readiness (1–10)</div>
+      <div class="q-help">1 = curious only. 10 = I will do the work even when I don’t feel like it. Be honest — the system adjusts tone to your readiness.</div>
+      <input id="q_ready" type="number" min="1" max="10" placeholder="1–10">
+    </div>
+
+    <div class="q-block">
+      <div class="q-label">8. Which path matters most right now?</div>
+      <div class="q-help">Your Life OS will open around this path first. You can use all paths later.</div>
+      <select id="q_path">
+        <option value="discipline">Discipline & Focus — structure, habits, finishing</option>
+        <option value="body">Body & Health — training, sleep, fuel</option>
+        <option value="mind">Mind & Wisdom — learning, journal, clarity</option>
+        <option value="faith">Faith & Character — integrity, prayer, purpose</option>
+        <option value="recovery">Recovery & Reset — clean breaks, accountability</option>
+        <option value="family">Family & Leadership — home, presence, example</option>
+      </select>
+    </div>
 
     <div class="btnRow">
       <button class="btn secondary" onclick="resetAll()">Reset</button>
-      <button class="btn" onclick="saveQuestions()">Continue</button>
+      <button class="btn gold" onclick="saveQuestions()">Build My Mirror Speech</button>
     </div>
   </div>
 </div>
 
-<!-- CONTRACT + STRIPE -->
+<!-- PERSONAL SPEECH -->
+<div id="personal" class="screen hidden">
+  <div class="card">
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
+      <h2 style="margin:0;">Your Mirror Speaks</h2>
+      <span class="badge">Stage: Tailored Word</span>
+    </div>
+    <p>This speech was built from your answers. This is the polished voice of the person you said you must become.</p>
+    <div id="personalSpeech" class="notice" style="min-height:220px;"></div>
+    <div class="btnRow">
+      <button class="btn secondary" onclick="replayPersonal()">Replay Voice</button>
+      <button class="btn secondary" onclick="showQuestions()">Edit Answers</button>
+      <button class="btn gold" onclick="goToTiers()">Continue to Access</button>
+    </div>
+  </div>
+</div>
+
+<!-- TIERS / STRIPE -->
+<div id="tiers" class="screen hidden">
+  <div class="card">
+    <h2>Choose Your Access</h2>
+    <p>Fair pricing. No gimmicks. The $1 seal proves intent. The Path unlocks your full Life OS dashboard — journal, paths, 90-day map — without owner/admin tools.</p>
+
+    <div class="tier-grid">
+      <div class="tier">
+        <h3>Seal of Intent</h3>
+        <div class="price">$1</div>
+        <p>One-time. Prove the decision is real.</p>
+        <ul>
+          <li>90-day contract</li>
+          <li>Today journal (morning + evening)</li>
+          <li>Path grid</li>
+          <li>Your personalized speech saved</li>
+        </ul>
+        <div class="btnRow">
+          <a class="btn" id="stripeSeal" target="_blank" rel="noopener" href="#">Pay $1 Seal</a>
+          <button class="btn secondary" onclick="confirmPaid('seal')">I paid $1</button>
+        </div>
+      </div>
+
+      <div class="tier featured">
+        <h3>Mirror Path</h3>
+        <div class="price">$9<span style="font-size:.9rem;color:var(--muted)">/mo</span></div>
+        <p>Full Life OS for daily builders. Fair and light.</p>
+        <ul>
+          <li>Everything in Seal</li>
+          <li>All Path rooms (Body, Mind, Faith, Recovery, Family)</li>
+          <li>AI-style daily brief from your answers</li>
+          <li>Quest map + weekly review</li>
+        </ul>
+        <div class="btnRow">
+          <a class="btn gold" id="stripePath" target="_blank" rel="noopener" href="#">Start $9/mo</a>
+          <button class="btn secondary" onclick="confirmPaid('path')">I subscribed</button>
+        </div>
+      </div>
+
+      <div class="tier">
+        <h3>Forge</h3>
+        <div class="price">$19<span style="font-size:.9rem;color:var(--muted)">/mo</span></div>
+        <p>For those who want maximum structure and voice.</p>
+        <ul>
+          <li>Everything in Path</li>
+          <li>Deeper voice briefs (morning + night)</li>
+          <li>Priority path coaching prompts</li>
+          <li>Export your year of journals</li>
+        </ul>
+        <div class="btnRow">
+          <a class="btn" id="stripeForge" target="_blank" rel="noopener" href="#">Start $19/mo</a>
+          <button class="btn secondary" onclick="confirmPaid('forge')">I subscribed</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="notice" style="margin-top:16px;">
+      After Stripe, return to this site. If the page doesn’t unlock automatically, tap “I paid” on your tier.
+      Success return URL to set in Stripe: <b>https://mirrorpathai.com/?paid=1</b>
+    </div>
+    <div class="btnRow">
+      <button class="btn secondary" onclick="showPersonal()">Back to Speech</button>
+    </div>
+  </div>
+</div>
+
+<!-- CONTRACT (after pay or with seal) -->
 <div id="contract" class="screen hidden">
   <div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;">
       <div>
         <h2 style="margin:0;">The 90-Day Contract</h2>
-        <p>This is not a subscription. This is a decision.</p>
+        <p>Not a loophole. A promise with your name on it.</p>
       </div>
       <span class="badge" id="contractStatus">Status: Not Signed</span>
     </div>
-
     <div class="notice" style="margin-top:10px;">
-      You are about to put your name on a promise. If you are looking for comfort, walk away.
-      If you are looking for change, finish this and honor it.
+      You are putting your name on a standard. Comfort can leave. Change stays.
     </div>
-
     <hr>
-
     <div class="grid2">
       <div>
         <small>Definite Purpose (one clear sentence)</small>
-        <input id="c_purpose" placeholder="Example: I will become disciplined and rebuild my life with purpose.">
+        <input id="c_purpose" placeholder="I will become disciplined and rebuild my life with purpose.">
       </div>
       <div>
         <small>Primary Target by Day 90</small>
-        <input id="c_target" placeholder="Example: 90 days of executed discipline, routine, journal, and wins.">
+        <input id="c_target" placeholder="90 days of executed discipline, journal, and finished work.">
       </div>
     </div>
-
     <small>Non-negotiable daily actions</small>
-    <textarea id="c_actions" placeholder="Example: Fixed wake time, training, reading, journal, no drift."></textarea>
-
+    <textarea id="c_actions" placeholder="Fixed wake time, training, reading, journal, no drift."></textarea>
     <div class="grid2">
       <div>
         <small>What you refuse to do anymore</small>
-        <input id="c_refuse" placeholder="Example: Drift, blame, lying to yourself, hiding.">
+        <input id="c_refuse" placeholder="Drift, blame, lying to yourself, hiding.">
       </div>
       <div>
         <small>Consequence if you break this contract</small>
-        <input id="c_consequence" placeholder="Example: Restart Day 1 and write the honest reason.">
+        <input id="c_consequence" placeholder="Restart Day 1 and write the honest reason.">
       </div>
     </div>
-
-    <small>Signature (type your full name)</small>
+    <small>Signature (full name)</small>
     <input id="c_signature" placeholder="Type your full name to sign.">
-
     <label style="display:flex;align-items:center;gap:10px;margin-top:8px;">
       <input id="c_ack" type="checkbox" style="width:auto;margin:0;">
-      <small>I understand this is a $1 commitment to myself and my contract, not a subscription.</small>
+      <small>I understand this is a real commitment to myself and my path.</small>
     </label>
-
     <div class="btnRow">
-      <button class="btn secondary" onclick="backToQuestions()">Back</button>
-      <button class="btn secondary" onclick="resetAll()">Reset</button>
-      <button class="btn" onclick="signContract()">Sign Contract</button>
-    </div>
-
-    <div id="payBlock" class="hidden" style="margin-top:16px;">
-      <hr>
-      <h3>Prove it with Action.</h3>
-      <p>Your next move is a $1 commitment. Not to me. To you.</p>
-      <div class="btnRow">
-        <a class="btn" id="stripeBtn" target="_blank" rel="noopener">Pay $1 Commitment</a>
-        <button class="btn secondary" id="paidButton" onclick="confirmPaid()">I have paid my $1</button>
-      </div>
-      <small style="display:block;margin-top:10px;">
-        One dollar to yourself — proof of commitment, not a product purchase or subscription.
-      </small>
-    </div>
-
-    <div id="paidNote" class="notice hidden" style="margin-top:14px;">
-      Commitment complete. Payment recorded on this device. You do not need to pay again.
+      <button class="btn secondary" onclick="showTiers()">Back</button>
+      <button class="btn gold" onclick="signContract()">Sign & Enter Dashboard</button>
     </div>
   </div>
 </div>
 
-<!-- MAIN APP -->
+<!-- MAIN APP / LIFE OS DASHBOARD -->
 <div id="mainApp" class="hidden">
   <nav>
-    <div class="logo" id="logoTap" title="Mirror Path AI">Mirror Path AI</div>
-    <ul id="worldNav">
-      <li class="active" data-section="today" onclick="showSection('today', event)">Today</li>
-      <li data-section="path" onclick="showSection('path', event)">90-Day Path</li>
-      <li data-section="profile" onclick="showSection('profile', event)">Your Contract</li>
+    <div class="logo" id="logoTap">Mirror Path</div>
+    <div class="logo-sub" id="navUserLine">Your Life OS</div>
+    <div class="group">Home</div>
+    <ul>
+      <li class="active" data-section="dashboard" onclick="showSection('dashboard', event)">Dashboard</li>
+      <li data-section="today" onclick="showSection('today', event)">Today · Journal</li>
+      <li data-section="brief" onclick="showSection('brief', event)">Daily Brief</li>
+    </ul>
+    <div class="group">Paths</div>
+    <ul>
+      <li data-section="paths" onclick="showSection('paths', event)">All Paths</li>
+      <li data-section="pathwork" onclick="showSection('pathwork', event)">Active Path Work</li>
+      <li data-section="map90" onclick="showSection('map90', event)">90-Day Map</li>
+    </ul>
+    <div class="group">Identity</div>
+    <ul>
+      <li data-section="profile" onclick="showSection('profile', event)">Contract & Blueprint</li>
+      <li data-section="speechroom" onclick="showSection('speechroom', event)">Mirror Speech</li>
     </ul>
     <div id="apexNavBadge" class="apex-badge" onclick="showSection('apex', event); markApexNavActive();">Apex · My Use</div>
   </nav>
 
   <main>
-    <!-- TODAY: Daily Inspiration + Morning/Evening Journal -->
-    <div id="today" class="section active">
+    <!-- DASHBOARD -->
+    <div id="dashboard" class="section active">
+      <div class="panel">
+        <h1 id="dashHello">Welcome</h1>
+        <p id="dashSub">Your path is live. Start with the brief, then journal.</p>
+        <div class="notice" id="dashBrief" style="margin:14px 0;"></div>
+        <div class="btnRow">
+          <button class="btn gold" onclick="showSection('brief')">Hear Daily Brief</button>
+          <button class="btn" onclick="showSection('today')">Open Journal</button>
+          <button class="btn secondary" onclick="showSection('pathwork')">Work My Path</button>
+        </div>
+        <hr>
+        <div class="path-cards" id="dashPathCards"></div>
+      </div>
+    </div>
+
+    <!-- TODAY JOURNAL -->
+    <div id="today" class="section">
       <div class="panel">
         <h1 id="dayHeader">Day 1 of 90</h1>
         <div id="dailyQuote" class="quote"></div>
-
         <h3>Morning Reflection</h3>
-        <p>Read, then write what you intend to build today.</p>
-
+        <p>Read the mirror word, then write what you will build today.</p>
         <div id="morningMirror" class="notice"></div>
-
         <textarea id="morningIntent" placeholder="What kind of person will you be today?"></textarea>
         <textarea id="morningAction" placeholder="One discipline you will not break today"></textarea>
-        <textarea id="morningGratitude" placeholder="Three things you are grateful for today"></textarea>
-
+        <textarea id="morningGratitude" placeholder="Three things you are grateful for"></textarea>
         <div class="btnRow">
           <button class="btn" onclick="saveMorning()">Save Morning</button>
-          <button class="btn secondary" onclick="speakMorning()">Play Morning Message</button>
+          <button class="btn secondary" onclick="speakMorning()">Play Morning Voice</button>
         </div>
-
-        <hr style="margin-top:20px;">
-
+        <hr>
         <h3>Evening Reflection</h3>
-        <p>Face the truth of today, then correct tomorrow.</p>
-
-        <textarea id="eveningTruth" placeholder="Did you live in alignment with your purpose today?"></textarea>
-        <textarea id="eveningLesson" placeholder="What lesson did today teach you?"></textarea>
+        <p>Face the truth. Correct tomorrow.</p>
+        <textarea id="eveningTruth" placeholder="Did you live aligned with your purpose?"></textarea>
+        <textarea id="eveningLesson" placeholder="What did today teach you?"></textarea>
         <textarea id="eveningCorrection" placeholder="What will you correct tomorrow?"></textarea>
-
         <div class="btnRow">
           <button class="btn" onclick="saveEvening()">Save Evening</button>
-          <button class="btn secondary" onclick="speakEvening()">Play Evening Mirror</button>
+          <button class="btn secondary" onclick="speakEvening()">Play Evening Voice</button>
         </div>
-
         <div id="eveningMirror" class="notice" style="margin-top:14px;"></div>
       </div>
     </div>
 
-    <!-- 90-DAY PATH GRID -->
-    <div id="path" class="section">
+    <!-- DAILY BRIEF -->
+    <div id="brief" class="section">
       <div class="panel">
-        <h1>The 90-Day Path</h1>
-        <p>Days are marked complete when your evening reflection is saved.</p>
+        <h1>Daily Brief</h1>
+        <p>Spoken like your better self — firm, clear, never robotic noise.</p>
+        <div id="briefText" class="notice" style="min-height:180px;"></div>
+        <div class="btnRow">
+          <button class="btn gold" onclick="playBrief()">Play Brief</button>
+          <button class="btn secondary" onclick="rebuildBrief()">Rebuild from My Answers</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ALL PATHS -->
+    <div id="paths" class="section">
+      <div class="panel">
+        <h1>Life OS Paths</h1>
+        <p>Full platform paths for your growth. Owner promotion tools stay off this list.</p>
+        <div class="path-cards" id="allPathCards"></div>
+      </div>
+    </div>
+
+    <!-- ACTIVE PATH WORK -->
+    <div id="pathwork" class="section">
+      <div class="panel">
+        <h1 id="pathWorkTitle">Active Path</h1>
+        <p id="pathWorkHelp"></p>
+        <div id="pathWorkPrompt" class="notice" style="margin:12px 0;"></div>
+        <textarea id="pathWorkLog" placeholder="Write today’s path work here..."></textarea>
+        <div class="btnRow">
+          <button class="btn" onclick="savePathWork()">Save Path Work</button>
+          <button class="btn secondary" onclick="speakPathPrompt()">Play Path Voice</button>
+        </div>
+        <div id="pathWorkHistory" style="margin-top:14px;"></div>
+      </div>
+    </div>
+
+    <!-- 90 DAY MAP -->
+    <div id="map90" class="section">
+      <div class="panel">
+        <h1>The 90-Day Map</h1>
+        <p>Days mark complete when evening reflection is saved.</p>
         <div id="pathGrid" class="path-grid"></div>
       </div>
     </div>
 
-    <!-- CONTRACT / PROFILE (world) -->
+    <!-- PROFILE -->
     <div id="profile" class="section">
       <div class="panel">
-        <h1>Your Commitments</h1>
-        <p>These are the words you signed. Drift starts when you forget them.</p>
-        <pre id="profileSummary" class="notice" style="margin-top:10px;white-space:pre-wrap;"></pre>
+        <h1>Contract & Blueprint</h1>
+        <pre id="profileSummary" class="notice" style="white-space:pre-wrap;"></pre>
         <div class="btnRow">
-          <button class="btn secondary" onclick="resetAll()">Reset (this device only)</button>
+          <button class="btn secondary" onclick="resetAll()">Reset this device</button>
         </div>
       </div>
     </div>
 
-    <!-- APEX — owner only: leads, opportunity, money, sale, scale -->
+    <!-- SPEECH ROOM -->
+    <div id="speechroom" class="section">
+      <div class="panel">
+        <h1>Mirror Speech Room</h1>
+        <p>Your opening word and tailored identity speech — replay anytime.</p>
+        <h3>Opening</h3>
+        <div class="notice" id="speechroomIntro"></div>
+        <div class="btnRow"><button class="btn secondary" onclick="replayIntroFromApp()">Play Opening</button></div>
+        <h3 style="margin-top:16px;">Your Tailored Word</h3>
+        <div class="notice" id="speechroomPersonal"></div>
+        <div class="btnRow"><button class="btn gold" onclick="replayPersonalFromApp()">Play My Speech</button></div>
+      </div>
+    </div>
+
+    <!-- APEX -->
     <div id="apex" class="section">
       <div class="panel">
         <h1>Apex · My Use</h1>
-        <p>Private operator tools. Not part of the public 90-day growth path.
-          Leads · Opportunity · Money · Sale · Scale stay on you only.</p>
-
+        <p>Owner only. Leads · Opportunity · Money · Sale · Scale. Not part of the public Life OS.</p>
         <div class="apex-tabs" id="apexTabs">
-          <button type="button" class="active" data-apex="leads" onclick="showApexPanel('leads', this)">Leads</button>
-          <button type="button" data-apex="opportunities" onclick="showApexPanel('opportunities', this)">Opportunities</button>
-          <button type="button" data-apex="money" onclick="showApexPanel('money', this)">Money</button>
-          <button type="button" data-apex="sales" onclick="showApexPanel('sales', this)">Sales</button>
-          <button type="button" data-apex="scale" onclick="showApexPanel('scale', this)">Scale</button>
+          <button type="button" class="active" onclick="showApexPanel('leads', this)">Leads</button>
+          <button type="button" onclick="showApexPanel('opportunities', this)">Opportunities</button>
+          <button type="button" onclick="showApexPanel('money', this)">Money</button>
+          <button type="button" onclick="showApexPanel('sales', this)">Sales</button>
+          <button type="button" onclick="showApexPanel('scale', this)">Scale</button>
         </div>
-
         <div id="apex-leads" class="apex-panel active">
           <div class="grid2">
             <input id="apex_lead_name" placeholder="Lead name">
-            <input id="apex_lead_source" placeholder="Source (call, IG, referral…)">
+            <input id="apex_lead_source" placeholder="Source">
           </div>
-          <textarea id="apex_lead_notes" placeholder="Notes / next step"></textarea>
-          <div class="btnRow">
-            <button class="btn" onclick="apexAdd('leads')">Add Lead</button>
-          </div>
+          <textarea id="apex_lead_notes" placeholder="Notes"></textarea>
+          <div class="btnRow"><button class="btn" onclick="apexAdd('leads')">Add Lead</button></div>
           <div id="apex_list_leads" style="margin-top:14px;"></div>
         </div>
-
         <div id="apex-opportunities" class="apex-panel">
           <div class="grid2">
-            <input id="apex_opp_title" placeholder="Opportunity title">
-            <input id="apex_opp_value" type="number" placeholder="Est. value ($)">
+            <input id="apex_opp_title" placeholder="Opportunity">
+            <input id="apex_opp_value" type="number" placeholder="Value $">
           </div>
-          <input id="apex_opp_stage" placeholder="Stage (new, pursuing, won, lost)">
-          <textarea id="apex_opp_notes" placeholder="Notes / next step"></textarea>
-          <div class="btnRow">
-            <button class="btn" onclick="apexAdd('opportunities')">Add Opportunity</button>
-          </div>
+          <input id="apex_opp_stage" placeholder="Stage">
+          <textarea id="apex_opp_notes" placeholder="Notes"></textarea>
+          <div class="btnRow"><button class="btn" onclick="apexAdd('opportunities')">Add Opportunity</button></div>
           <div id="apex_list_opportunities" style="margin-top:14px;"></div>
         </div>
-
         <div id="apex-money" class="apex-panel">
           <div class="grid2">
-            <input id="apex_money_title" placeholder="Title (invoice, expense…)">
-            <input id="apex_money_amount" type="number" placeholder="Amount ($)">
+            <input id="apex_money_title" placeholder="Title">
+            <input id="apex_money_amount" type="number" placeholder="Amount $">
           </div>
-          <input id="apex_money_type" placeholder="Type (income, expense, receivable)">
+          <input id="apex_money_type" placeholder="income / expense">
           <textarea id="apex_money_notes" placeholder="Notes"></textarea>
-          <div class="btnRow">
-            <button class="btn" onclick="apexAdd('money')">Add Money Item</button>
-          </div>
+          <div class="btnRow"><button class="btn" onclick="apexAdd('money')">Add Money Item</button></div>
           <div id="apex_list_money" style="margin-top:14px;"></div>
         </div>
-
         <div id="apex-sales" class="apex-panel">
           <div class="grid2">
-            <input id="apex_sale_title" placeholder="Sale / deal name">
-            <input id="apex_sale_amount" type="number" placeholder="Amount ($)">
+            <input id="apex_sale_title" placeholder="Sale">
+            <input id="apex_sale_amount" type="number" placeholder="Amount $">
           </div>
-          <input id="apex_sale_status" placeholder="Status (pitched, closed, lost)">
+          <input id="apex_sale_status" placeholder="Status">
           <textarea id="apex_sale_notes" placeholder="Notes"></textarea>
-          <div class="btnRow">
-            <button class="btn" onclick="apexAdd('sales')">Add Sale</button>
-          </div>
+          <div class="btnRow"><button class="btn" onclick="apexAdd('sales')">Add Sale</button></div>
           <div id="apex_list_sales" style="margin-top:14px;"></div>
         </div>
-
         <div id="apex-scale" class="apex-panel">
-          <input id="apex_scale_title" placeholder="Scale move (affiliate, ads, partner, hire…)">
-          <input id="apex_scale_status" placeholder="Status (idea, active, done)">
-          <textarea id="apex_scale_notes" placeholder="Plan / metric"></textarea>
-          <div class="btnRow">
-            <button class="btn" onclick="apexAdd('scale')">Add Scale Item</button>
-          </div>
+          <input id="apex_scale_title" placeholder="Scale move">
+          <input id="apex_scale_status" placeholder="Status">
+          <textarea id="apex_scale_notes" placeholder="Plan"></textarea>
+          <div class="btnRow"><button class="btn" onclick="apexAdd('scale')">Add Scale Item</button></div>
           <div id="apex_list_scale" style="margin-top:14px;"></div>
         </div>
-
         <div class="btnRow" style="margin-top:18px;">
           <button class="btn secondary" onclick="apexLock()">Lock Apex</button>
-          <button class="btn secondary" onclick="apexExport()">Export Apex JSON</button>
+          <button class="btn secondary" onclick="apexExport()">Export JSON</button>
         </div>
       </div>
     </div>
   </main>
 </div>
 
-<!-- Discreet owner entry — not part of the public product -->
 <div class="owner-hint" id="ownerHint" title="Owner">...</div>
 
-<!-- APEX unlock modal -->
 <div id="apexGate" class="modalBack hidden">
   <div class="modal">
     <h2>Apex · Owner Unlock</h2>
-    <p>Leads, opportunity, money, sale, and scale stay off the public path.</p>
-    <input id="apexPinInput" type="password" placeholder="Owner PIN" autocomplete="current-password">
+    <p>Leads, opportunity, money, sale, scale — owner only.</p>
+    <input id="apexPinInput" type="password" placeholder="Owner PIN">
     <div class="btnRow">
       <button class="btn" onclick="apexTryUnlock()">Unlock</button>
       <button class="btn secondary" onclick="closeApexGate()">Cancel</button>
@@ -604,13 +606,12 @@ main{
   </div>
 </div>
 
-<!-- POST-PAYMENT CONFIRMATION MODAL -->
 <div id="paidModal" class="modalBack hidden">
   <div class="modal">
-    <h2>Commitment Confirmed</h2>
+    <h2>You’re in.</h2>
     <p id="paidSpeech"></p>
     <div class="btnRow">
-      <button class="btn" onclick="enterApp()">Enter Day One</button>
+      <button class="btn gold" onclick="enterContractOrApp()">Continue</button>
       <button class="btn secondary" onclick="closePaidModal()">Close</button>
     </div>
   </div>
@@ -618,121 +619,174 @@ main{
 
 <script>
 /* =========================
-   CONFIG / STORAGE
+   CONFIG — cheap & clear
+   Paste real Stripe Payment Links when ready.
+   Seal uses your existing $1 link.
 ========================= */
-const STRIPE_LINK = "https://buy.stripe.com/bJebJ1dTlfnvdCn4aZbV600";
-const STORAGE_KEY = "mirrorpath_ai_v2";
-/* Owner Apex tools (leads / money / sale / scale) — change this PIN before shipping if needed */
+const STRIPE = {
+  seal:  "https://buy.stripe.com/bJebJ1dTlfnvdCn4aZbV600", // $1 existing
+  path:  "https://buy.stripe.com/bJebJ1dTlfnvdCn4aZbV600", // TODO: replace with $9/mo Payment Link
+  forge: "https://buy.stripe.com/bJebJ1dTlfnvdCn4aZbV600"  // TODO: replace with $19/mo Payment Link
+};
+const STORAGE_KEY = "mirrorpath_ai_v3";
 const APEX_PIN = "apexpath";
 const APEX_STORAGE_KEY = "mirrorpath_apex_v1";
 const APEX_SESSION_KEY = "mirrorpath_apex_unlocked";
 
+const PATHS = {
+  discipline: {
+    title: "Discipline & Focus",
+    blurb: "Structure, habits, finishing what you start.",
+    prompt: "Where will you refuse to drift today — and what finished work proves it?"
+  },
+  body: {
+    title: "Body & Health",
+    blurb: "Training, sleep, fuel, recovery.",
+    prompt: "What will you do for your body today that the weak version would skip?"
+  },
+  mind: {
+    title: "Mind & Wisdom",
+    blurb: "Learning, journal, clear thinking.",
+    prompt: "What idea will you feed your mind today — and what noise will you cut?"
+  },
+  faith: {
+    title: "Faith & Character",
+    blurb: "Integrity, prayer, purpose larger than self.",
+    prompt: "How will you act with integrity today when no one is watching?"
+  },
+  recovery: {
+    title: "Recovery & Reset",
+    blurb: "Clean breaks, honest accountability.",
+    prompt: "What trigger will you refuse today, and who holds you to it?"
+  },
+  family: {
+    title: "Family & Leadership",
+    blurb: "Presence, example, calm strength at home.",
+    prompt: "How will the people closest to you feel your leadership today?"
+  }
+};
+
 const $ = id => document.getElementById(id);
-const val = id => (($(id).value || "").trim());
+const val = id => (($(id)?.value || "").trim());
 
 function getState(){
-  try{
-    const raw = localStorage.getItem(STORAGE_KEY);
-    return raw ? JSON.parse(raw) : null;
-  }catch(e){ return null; }
+  try{ const raw = localStorage.getItem(STORAGE_KEY); return raw ? JSON.parse(raw) : null; }
+  catch(e){ return null; }
 }
-function setState(st){
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(st));
-}
+function setState(st){ localStorage.setItem(STORAGE_KEY, JSON.stringify(st)); }
 function resetAll(){
   localStorage.removeItem(STORAGE_KEY);
   window.location.href = window.location.pathname;
 }
 
 /* =========================
-   SPEECH
+   NARRATOR — strong, polished, human
+   Free browser voice; paced like a man who means it.
 ========================= */
 let MIRROR_VOICE = null;
+let VOICE_MUTED = false;
+let speakToken = 0;
 
 function loadMirrorVoice(){
-  const voices = window.speechSynthesis.getVoices();
+  const voices = window.speechSynthesis.getVoices() || [];
   if(!voices.length) return;
-
+  const prefer = [
+    /microsoft (guy|david|mark|james|ryan)/i,
+    /google us english/i,
+    /daniel/i,
+    /alex/i,
+    /david/i,
+    /george/i,
+    /male/i
+  ];
+  for(const re of prefer){
+    const hit = voices.find(v => re.test(v.name) && (!v.lang || v.lang.startsWith("en")));
+    if(hit){ MIRROR_VOICE = hit; return; }
+  }
   MIRROR_VOICE =
-    voices.find(v => /daniel|george|david|barry|guy|alex/i.test(v.name)) ||
+    voices.find(v => v.lang && v.lang.startsWith("en-US")) ||
     voices.find(v => v.lang && v.lang.startsWith("en")) ||
     voices[0];
 }
-
 window.speechSynthesis.onvoiceschanged = loadMirrorVoice;
+loadMirrorVoice();
 
-function speak(text){
-  try{
-    if(!text) return;
-    if(!MIRROR_VOICE) loadMirrorVoice();
-
-    window.speechSynthesis.cancel();
-
-    const u = new SpeechSynthesisUtterance(text);
-    if(MIRROR_VOICE) u.voice = MIRROR_VOICE;
-
-    u.rate = 0.95;
-    u.pitch = 0.7;
-    u.volume = 1;
-
-    window.speechSynthesis.speak(u);
-  }catch(e){}
+function toggleMute(){
+  VOICE_MUTED = !VOICE_MUTED;
+  if(VOICE_MUTED) window.speechSynthesis.cancel();
+  $("muteBtn").textContent = VOICE_MUTED ? "🔇 Voice Off" : "🔊 Voice On";
 }
 
-/* special: intro speech as ONE continuous narration */
-let introSpeechUtterance = null;
-function speakIntroScript(){
+/** Split into breath-sized lines for clear dictation */
+function chunkSpeech(text){
+  return String(text || "")
+    .replace(/\s+/g, " ")
+    .split(/(?<=[.!?])\s+/)
+    .map(s => s.trim())
+    .filter(Boolean);
+}
+
+/**
+ * Speak like a polished man of power:
+ * slightly slow, steady pitch, pause between sentences.
+ */
+function speak(text, opts = {}){
   try{
+    if(VOICE_MUTED || !text) return Promise.resolve();
     if(!MIRROR_VOICE) loadMirrorVoice();
     window.speechSynthesis.cancel();
+    const myToken = ++speakToken;
+    const parts = chunkSpeech(text);
+    const rate = opts.rate ?? 0.88;
+    const pitch = opts.pitch ?? 0.92;
+    let i = 0;
 
-    const text = introLines.join(" ");
-    introSpeechUtterance = new SpeechSynthesisUtterance(text);
-    if(MIRROR_VOICE) introSpeechUtterance.voice = MIRROR_VOICE;
-    introSpeechUtterance.rate = 0.95;
-    introSpeechUtterance.pitch = 0.7;
-    introSpeechUtterance.volume = 1;
-
-    window.speechSynthesis.speak(introSpeechUtterance);
-  }catch(e){}
+    return new Promise(resolve => {
+      function next(){
+        if(myToken !== speakToken){ resolve(); return; }
+        if(i >= parts.length){ resolve(); return; }
+        const u = new SpeechSynthesisUtterance(parts[i++]);
+        if(MIRROR_VOICE) u.voice = MIRROR_VOICE;
+        u.rate = rate;
+        u.pitch = pitch;
+        u.volume = 1;
+        u.onend = () => setTimeout(next, opts.pauseMs ?? 320);
+        u.onerror = () => setTimeout(next, 100);
+        window.speechSynthesis.speak(u);
+      }
+      next();
+    });
+  }catch(e){ return Promise.resolve(); }
 }
 
 /* =========================
-   INTRO SCRIPT
+   INTRO — plain theology anyone can understand
+   Core idea: you were made for more; free will + daily choices
+   write the man in the mirror; purpose + discipline close the gap.
 ========================= */
 const introLines = [
-  "Sit with this moment.",
-  "For years you have carried an image in your mind of the person you know you could be.",
-  "Stronger. Clearer. Disciplined. Respected. At peace with yourself.",
-  "But between who you are and who you could be, there is a gap created by one thing: the decisions you make every day.",
-  "Every habit you tolerate, every excuse you repeat, every promise you break to yourself — they are all written in the mirror.",
-  "The mirror never lies. It reflects the truth of your discipline, not the story in your head.",
-  "Napoleon Hill taught that change begins with a definite purpose and a burning desire to see it through.",
-  "Most people never choose a clear purpose. They never commit long enough to become the person they were designed to be.",
-  "You are here because that version of you is no longer acceptable.",
-  "You are tired of drifting. Tired of waking up to the same problems with the same weak answers.",
-  "This place — Mirror Path — exists for one reason: to teach you how to become the best version of yourself on purpose.",
-  "Not by hype. Not by feelings. By structure, by discipline, and by facing the man in the mirror every single day.",
-  "Over the next ninety days you will choose a definite purpose. You will write a contract with yourself. You will act on it daily.",
-  "You will track your steps. You will confront your failures. You will record your wins. And the mirror will hold you accountable.",
-  "There is no magic here. Only you, your decisions, and the truth.",
-  "If you are looking for entertainment, close this page.",
-  "If you are ready to take responsibility for the person in the mirror and build the best version of yourself, stay.",
-  "From this moment forward, every choice either serves your old life or your new one.",
-  "Take a breath.",
-  "When this introduction ends, you will answer questions that force honesty.",
-  "Then you will sign a ninety-day commitment.",
-  "Then you will prove it with action.",
-  "The best version of you is not an idea. It is a decision you make — and remake — every day.",
-  "Let us begin."
+  "Sit down for a moment. Let the noise fall away.",
+  "You already know there is a better version of you. Stronger. Clearer. More disciplined. At peace with himself.",
+  "That better version is not a fantasy. In the oldest wisdom of faith and character, it is called design — you were made with purpose, not by accident.",
+  "Here is the plain truth: between who you are and who you could be, there is only one bridge — the choices you make when no one is watching.",
+  "Every habit you allow, every excuse you repeat, every promise you break to yourself becomes your character. The mirror does not argue. It only reports.",
+  "Some people call this theology. Some call it success philosophy. Mirror Path calls it responsibility. You were given a will. You can waste it, or you can aim it.",
+  "Napoleon Hill taught that a definite purpose, held with burning desire, is the starting point of all achievement. Scripture and wise teachers agree on the same bone: a double-minded life stays unstable.",
+  "So we keep it simple. One clear aim. Daily honesty. Small disciplines kept. A contract with yourself that you will not treat like a joke.",
+  "For ninety days, this path will ask you to face the man in the mirror every morning and every night. Not to shame you. To train you.",
+  "You will name who you are, who you must become, what has stopped you, and what staying the same is costing you. Then you will act.",
+  "There is no magic button. There is only a strong, polished standard — the voice of your better self — calling you forward without drama and without softness that lies.",
+  "If you want entertainment, leave. If you want a life operating system built on truth, stay.",
+  "When I finish, you will answer clear questions. Then I will speak back to you as the man you said you must become. Then you will choose access, sign your contract, and begin the work.",
+  "Breathe. Stand up inside. Let us begin."
 ];
 
 let introIndex = 0;
+let introTyping = false;
 
 function showOnly(id){
-  const ids = ["hero","intro","questions","contract","mainApp"];
-  ids.forEach(x => $(x).classList.add("hidden"));
-  $(id).classList.remove("hidden");
+  ["hero","intro","questions","personal","tiers","contract","mainApp"].forEach(x => $(x)?.classList.add("hidden"));
+  $(id)?.classList.remove("hidden");
   document.body.style.overflow = (id === "mainApp") ? "hidden" : "auto";
 }
 
@@ -741,49 +795,65 @@ function startIntro(){
   $("stageBadge").textContent = "Stage: Intro";
   $("introText").textContent = "";
   introIndex = 0;
-  speakIntroScript();          // one continuous voice
-  typeNextIntroLine();
+  introTyping = true;
+  speak(introLines.join(" "));
+  typeIntro();
 }
 
-function typeNextIntroLine(){
+function typeIntro(){
+  if(!introTyping) return;
   if(introIndex >= introLines.length){
+    introTyping = false;
     const st = getState() || {};
     st.stage = "questions";
     st.started = st.started || new Date().toISOString();
     setState(st);
-    showQuestions();
     return;
   }
-
   const line = introLines[introIndex];
   const el = $("introText");
   let i = 0;
-
   function step(){
+    if(!introTyping) return;
     if(i < line.length){
       el.textContent += line[i++];
-      setTimeout(step, 28);
+      setTimeout(step, 18);
     }else{
       el.textContent += "\n\n";
       introIndex++;
-      setTimeout(typeNextIntroLine, 650);
+      setTimeout(typeIntro, 420);
     }
   }
-
   step();
 }
 
+function replayIntro(){
+  $("introText").textContent = introLines.join("\n\n");
+  speak(introLines.join(" "));
+}
+
 function skipIntro(){
+  introTyping = false;
+  window.speechSynthesis.cancel();
   const st = getState() || {};
   st.stage = "questions";
   st.started = st.started || new Date().toISOString();
   setState(st);
+  showQuestions();
+}
+
+function finishIntro(){
+  introTyping = false;
   window.speechSynthesis.cancel();
+  const st = getState() || {};
+  st.stage = "questions";
+  st.started = st.started || new Date().toISOString();
+  setState(st);
   showQuestions();
 }
 
 /* =========================
-   QUESTIONS
+   QUESTIONS + TAILORED SPEECH
 ========================= */
 function showQuestions(){
   showOnly("questions");
@@ -795,56 +865,198 @@ function showQuestions(){
   $("q_cost").value = st.q_cost || "";
   $("q_focus").value = st.q_focus || "";
   $("q_ready").value = st.q_ready || "";
+  $("q_path").value = st.q_path || "discipline";
 }
 
 function saveQuestions(){
-  const st = getState() || {};
-  st.name   = val("name");
-  st.q_now  = val("q_now");
-  st.q_want = val("q_want");
-  st.q_why  = val("q_why");
-  st.q_cost = val("q_cost");
-  st.q_focus= val("q_focus");
-  st.q_ready= val("q_ready");
-  st.started = st.started || new Date().toISOString();
-  st.stage = "contract";
-  setState(st);
+  const name = val("name");
+  const q_now = val("q_now");
+  const q_want = val("q_want");
+  const q_why = val("q_why");
+  const q_cost = val("q_cost");
+  const q_focus = val("q_focus");
+  const q_ready = val("q_ready");
+  const q_path = val("q_path") || "discipline";
 
-  speak("Good. Now sign the contract. No drifting.");
-  showContract();
+  if(!name || !q_now || !q_want || !q_why || !q_cost || !q_focus || !q_ready){
+    alert("Finish every question. Incomplete honesty builds a weak system.");
+    speak("Stop. Finish every question. Incomplete honesty builds a weak system.");
+    return;
+  }
+
+  const st = getState() || {};
+  Object.assign(st, { name, q_now, q_want, q_why, q_cost, q_focus, q_ready, q_path, stage: "personal" });
+  st.started = st.started || new Date().toISOString();
+  st.personalSpeech = buildPersonalSpeech(st);
+  st.dailyBrief = buildDailyBrief(st);
+  setState(st);
+  showPersonal();
+}
+
+function pathTitle(key){ return (PATHS[key] || PATHS.discipline).title; }
+
+/** Charismatic mini-novel monologue: polished better self */
+function buildPersonalSpeech(st){
+  const name = st.name || "Brother";
+  const ready = Number(st.q_ready || 5);
+  const path = pathTitle(st.q_path);
+  const heat = ready >= 8
+    ? "You marked yourself ready. Good. Readiness without action is still a lie — so we move."
+    : ready >= 5
+      ? "You are willing, not fully on fire. That is fine. Flame grows when fuel is daily, not dramatic."
+      : "You admitted low readiness. Honesty is strength. We will not fake intensity. We will build it.";
+
+  return `${name}.
+
+Look at me. Not the weak story. Not the excuse archive. Me — the polished standard you said you must become.
+
+You told the truth about who you are right now:
+"${st.q_now}"
+
+I heard you. I do not flinch. I do not flatter. I take that raw material and forge it.
+
+You named who I am — who you are becoming in ninety days:
+"${st.q_want}"
+
+That is not poetry. That is a contract in human form. From this moment, every morning I will ask if your actions matched that sentence.
+
+You said what has stopped you:
+"${st.q_why}"
+
+We do not negotiate with that enemy. We schedule against it. We starve it. We replace it with structure.
+
+You admitted the cost of staying the same:
+"${st.q_cost}"
+
+Good. Pain remembered becomes fuel. Waste that cost and you pay twice — once for the past, again for cowardice.
+
+Your one build and one break:
+"${st.q_focus}"
+
+Simple. Daily. Non-negotiable. Complexity is how mediocre men hide.
+
+Your first Path is ${path}. That is where we train this season. Journal is the record. The ninety-day map is the battlefield. The brief is my voice in your ear when feelings try to run the day.
+
+${heat}
+
+I am not a robot reading a script. I am the man you asked for — clear diction, steady power, no apology for standards.
+
+When you enter the dashboard, you do not browse for entertainment. You work: brief, journal, path work, map. That is the Life Operating System.
+
+Stand up inside, ${name}. The mirror is open. The path is under your feet.
+
+Now choose access. Then sign your name. Then begin Day One.`;
+}
+
+function buildDailyBrief(st){
+  const name = st.name || "You";
+  const path = PATHS[st.q_path] || PATHS.discipline;
+  const day = dayNumber(st);
+  return `${name}. Day ${day} of ninety.
+
+Purpose: ${st.contract?.purpose || st.q_want || "become the better self you named"}.
+
+Primary path today: ${path.title}. ${path.prompt}
+
+Habit focus: ${st.q_focus || "one build, one break"}.
+
+Blocker to refuse: ${st.q_why || "the old pattern"}.
+
+Morning: decide who you are. Midday: keep the standard when it is inconvenient. Evening: tell the truth and correct.
+
+No drama. No delay. Execute.`;
+}
+
+function showPersonal(){
+  showOnly("personal");
+  const st = getState() || {};
+  const speech = st.personalSpeech || buildPersonalSpeech(st);
+  $("personalSpeech").textContent = speech;
+  speak(speech);
+}
+
+function replayPersonal(){
+  const st = getState() || {};
+  const speech = st.personalSpeech || buildPersonalSpeech(st);
+  $("personalSpeech").textContent = speech;
+  speak(speech);
+}
+
+function goToTiers(){
+  window.speechSynthesis.cancel();
+  const st = getState() || {};
+  st.stage = "tiers";
+  setState(st);
+  showTiers();
+}
+
+function showTiers(){
+  showOnly("tiers");
+  $("stripeSeal").href = STRIPE.seal;
+  $("stripePath").href = STRIPE.path;
+  $("stripeForge").href = STRIPE.forge;
+}
+
+function showTiersFromBoot(){ showTiers(); }
+
+function confirmPaid(tier){
+  const st = getState() || {};
+  st.paid = true;
+  st.tier = tier || "seal";
+  st.paidAt = new Date().toISOString();
+  st.stage = "paid";
+  st.journal = st.journal || {};
+  setState(st);
+  showPaidModal();
+}
+
+function showPaidModal(){
+  const st = getState() || {};
+  const name = st.name || "You";
+  const tier = st.tier || "seal";
+  const speech = `${name}.
+
+You stopped talking and moved.
+
+Your tier: ${tier}.
+Your purpose is no longer a wish — it is funded by your word.
+
+Next you sign the ninety-day contract, then you enter the dashboard.
+Journal. Paths. Map. Brief. That is the work.
+
+I will meet you there every day.`;
+  $("paidSpeech").textContent = speech;
+  $("paidModal").classList.remove("hidden");
+  speak(speech);
+}
+
+function closePaidModal(){ $("paidModal").classList.add("hidden"); }
+
+function enterContractOrApp(){
+  closePaidModal();
+  const st = getState() || {};
+  if(!st.contractSigned){
+    showContract();
+  }else{
+    enterApp();
+  }
 }
 
 /* =========================
-   CONTRACT + STRIPE
+   CONTRACT
 ========================= */
 function showContract(){
   showOnly("contract");
   const st = getState() || {};
   const c = st.contract || {};
-
-  $("c_purpose").value = c.purpose || "";
+  $("c_purpose").value = c.purpose || st.q_want || "";
   $("c_target").value = c.target || "";
-  $("c_actions").value = c.actions || "";
+  $("c_actions").value = c.actions || st.q_focus || "";
   $("c_refuse").value = c.refuse || "";
   $("c_consequence").value = c.consequence || "";
-  $("c_signature").value = c.signature || "";
+  $("c_signature").value = c.signature || st.name || "";
   $("c_ack").checked = !!c.acknowledged;
-
-  $("stripeBtn").href = STRIPE_LINK;
-
-  if(st.paid){
-    $("payBlock").classList.add("hidden");
-    $("paidNote").classList.remove("hidden");
-    $("contractStatus").textContent = st.contractSigned ? "Status: Signed" : "Status: Not Signed";
-  }else{
-    $("paidNote").classList.add("hidden");
-    $("payBlock").classList.toggle("hidden", !st.contractSigned);
-    $("contractStatus").textContent = st.contractSigned ? "Status: Signed" : "Status: Not Signed";
-  }
-}
-
-function backToQuestions(){
-  showQuestions();
+  $("contractStatus").textContent = st.contractSigned ? "Status: Signed" : "Status: Not Signed";
 }
 
 function signContract(){
@@ -858,126 +1070,77 @@ function signContract(){
     acknowledged: $("c_ack").checked,
     signedAt: new Date().toISOString()
   };
-
   if(!contract.purpose || !contract.target || !contract.actions || !contract.signature || !contract.acknowledged){
-    $("contractStatus").innerHTML = '<span class="danger">Status: Incomplete — finish every field and check the box.</span>';
-    speak("Stop. Finish the contract completely.");
+    $("contractStatus").innerHTML = '<span class="danger">Status: Incomplete</span>';
+    speak("Finish the contract completely. Standards are not optional.");
     return;
   }
-
   const st = getState() || {};
+  if(!st.paid){
+    speak("Choose access first. Then sign.");
+    showTiers();
+    return;
+  }
   st.contract = contract;
   st.contractSigned = true;
-  st.stage = st.paid ? "app" : "pay";
+  st.stage = "app";
+  st.dailyBrief = buildDailyBrief(st);
   setState(st);
-
-  $("contractStatus").textContent = "Status: Signed";
-  if(!st.paid){
-    $("payBlock").classList.remove("hidden");
-    speak("Contract signed. Now prove it with action. One dollar.");
-  }else{
-    showOnly("mainApp");
-    setupApp();
-  }
-}
-
-function confirmPaid(){
-  const st = getState() || {};
-  if(!st.contractSigned){
-    speak("No. Sign the contract first.");
-    return;
-  }
-  st.paid = true;
-  st.stage = "paid";
-  st.paidAt = new Date().toISOString();
-  st.journal = st.journal || {};
-  setState(st);
-  showPaidModal();
-}
-
-/* =========================
-   POST-PAYMENT MODAL
-========================= */
-function showPaidModal(){
-  const st = getState() || {};
-  const name = st.name || "You";
-  const purpose = st.contract?.purpose || "your purpose";
-  const target = st.contract?.target || "your target";
-
-  const speechText = `${name}, you just did something most people never do.
-
-You stopped talking about change and took action.
-
-You signed a ninety-day contract with yourself.
-You put money behind your word.
-That dollar is not about price.
-It is proof that you are willing to move.
-
-Your purpose:
-${purpose}
-
-Your target over the next ninety days:
-${target}
-
-From here on, every day begins at the mirror.
-
-You will start the morning by deciding who you are becoming.
-You will end the evening by telling the truth about how you lived.
-The journal is not homework.
-It is how you carve your character into your own mind.
-
-Your morning reflections will shape how you think.
-Your evening reflections will correct how you act.
-The mirror will not shame you.
-It will remind you of who you are becoming.
-
-Ninety days from now, you will not be guessing who you are.
-You will have proof — written in your own words.
-
-Now we begin Day One.`;
-
-  $("paidSpeech").textContent = speechText;
-  $("paidModal").classList.remove("hidden");
-  $("paidModal").scrollTop = 0;
-  speak(speechText);
-}
-
-function closePaidModal(){
-  $("paidModal").classList.add("hidden");
+  speak(`${st.name || "You"}. Contract sealed. Enter the dashboard. Begin the work.`);
+  enterApp();
 }
 
 function enterApp(){
-  $("paidModal").classList.add("hidden");
   const st = getState() || {};
   st.paid = true;
   st.stage = "app";
   st.journal = st.journal || {};
+  st.pathLogs = st.pathLogs || {};
   setState(st);
   showOnly("mainApp");
   setupApp();
 }
 
 /* =========================
-   MAIN APP: TODAY / PATH / PROFILE
+   DASHBOARD / LIFE OS
 ========================= */
+function dayNumber(st){
+  const start = new Date((st && st.started) || new Date().toISOString());
+  const diff = Math.floor((Date.now() - start.getTime()) / 86400000) + 1;
+  return Math.max(1, Math.min(90, diff));
+}
+
+const quotes = [
+  "Self-discipline is the bridge between goals and accomplishment.",
+  "Character is built when no one is watching.",
+  "You do not become successful. You become consistent.",
+  "The mirror will not lie for you — or to you.",
+  "Every habit is a vote for the person you are becoming."
+];
+
 function showSection(id, ev){
-  if(id === "apex" && !isApexUnlocked()){
-    openApexGate();
-    return;
-  }
+  if(id === "apex" && !isApexUnlocked()){ openApexGate(); return; }
   document.querySelectorAll(".section").forEach(s => s.classList.remove("active"));
   document.querySelectorAll("nav li").forEach(li => li.classList.remove("active"));
   $("apexNavBadge")?.classList.remove("active");
-  $(id).classList.add("active");
+  $(id)?.classList.add("active");
   if(ev && ev.currentTarget){
-    if(ev.currentTarget.id === "apexNavBadge"){
-      markApexNavActive();
-    }else{
-      ev.currentTarget.classList.add("active");
-    }
-  }else if(id === "apex"){
-    markApexNavActive();
+    if(ev.currentTarget.id === "apexNavBadge") markApexNavActive();
+    else ev.currentTarget.classList.add("active");
+  } else if(id === "apex") markApexNavActive();
+  else {
+    document.querySelectorAll("nav li").forEach(li => {
+      if(li.dataset.section === id) li.classList.add("active");
+    });
   }
+  if(id === "dashboard") renderDashboard();
+  if(id === "today") renderToday();
+  if(id === "brief") renderBrief();
+  if(id === "paths") renderAllPaths();
+  if(id === "pathwork") renderPathWork();
+  if(id === "map90") buildGridOnce(true);
+  if(id === "profile") renderProfile();
+  if(id === "speechroom") renderSpeechRoom();
   if(id === "apex") renderAllApex();
 }
 
@@ -986,303 +1149,72 @@ function markApexNavActive(){
   $("apexNavBadge")?.classList.add("active");
 }
 
-/* =========================
-   APEX — MY USE (owner only)
-   World never sees this until PIN unlock.
-========================= */
-function isApexUnlocked(){
-  try{ return sessionStorage.getItem(APEX_SESSION_KEY) === "1"; }catch(e){ return false; }
-}
-function setApexUnlocked(on){
-  try{
-    if(on) sessionStorage.setItem(APEX_SESSION_KEY, "1");
-    else sessionStorage.removeItem(APEX_SESSION_KEY);
-  }catch(e){}
-  syncApexNav();
-}
-function syncApexNav(){
-  const badge = $("apexNavBadge");
-  if(!badge) return;
-  if(isApexUnlocked()) badge.classList.add("visible");
-  else badge.classList.remove("visible");
-}
-function openApexGate(){
-  $("apexGateMsg").textContent = "";
-  $("apexPinInput").value = "";
-  $("apexGate").classList.remove("hidden");
-  setTimeout(() => $("apexPinInput")?.focus(), 50);
-}
-function closeApexGate(){
-  $("apexGate").classList.add("hidden");
-}
-function apexTryUnlock(){
-  const pin = ($("apexPinInput").value || "").trim();
-  if(pin === APEX_PIN){
-    setApexUnlocked(true);
-    closeApexGate();
-    // If user is already in the app, open Apex; else just unlock badge for later
-    if(!$("mainApp").classList.contains("hidden")){
-      showSection("apex");
-    }
-  }else{
-    $("apexGateMsg").textContent = "Wrong PIN.";
-  }
-}
-function apexLock(){
-  setApexUnlocked(false);
-  showSection("today");
-  document.querySelectorAll("nav li").forEach(li => {
-    if(li.dataset.section === "today") li.classList.add("active");
-  });
-}
-function getApex(){
-  try{
-    const raw = localStorage.getItem(APEX_STORAGE_KEY);
-    const data = raw ? JSON.parse(raw) : null;
-    return data || { leads:[], opportunities:[], money:[], sales:[], scale:[] };
-  }catch(e){
-    return { leads:[], opportunities:[], money:[], sales:[], scale:[] };
-  }
-}
-function setApex(data){
-  localStorage.setItem(APEX_STORAGE_KEY, JSON.stringify(data));
-}
-function showApexPanel(name, btn){
-  document.querySelectorAll(".apex-panel").forEach(p => p.classList.remove("active"));
-  document.querySelectorAll("#apexTabs button").forEach(b => b.classList.remove("active"));
-  $("apex-" + name)?.classList.add("active");
-  if(btn) btn.classList.add("active");
-}
-function apexAdd(kind){
-  const data = getApex();
-  const id = Date.now().toString(36);
-  let item = null;
-
-  if(kind === "leads"){
-    const name = val("apex_lead_name");
-    if(!name){ alert("Lead name required."); return; }
-    item = { id, name, source: val("apex_lead_source"), notes: val("apex_lead_notes"), created: new Date().toISOString() };
-    $("apex_lead_name").value = "";
-    $("apex_lead_source").value = "";
-    $("apex_lead_notes").value = "";
-  }else if(kind === "opportunities"){
-    const title = val("apex_opp_title");
-    if(!title){ alert("Opportunity title required."); return; }
-    item = {
-      id, title,
-      value: Number($("apex_opp_value").value || 0),
-      stage: val("apex_opp_stage") || "new",
-      notes: val("apex_opp_notes"),
-      created: new Date().toISOString()
-    };
-    $("apex_opp_title").value = "";
-    $("apex_opp_value").value = "";
-    $("apex_opp_stage").value = "";
-    $("apex_opp_notes").value = "";
-  }else if(kind === "money"){
-    const title = val("apex_money_title");
-    if(!title){ alert("Money title required."); return; }
-    item = {
-      id, title,
-      amount: Number($("apex_money_amount").value || 0),
-      type: val("apex_money_type") || "expense",
-      notes: val("apex_money_notes"),
-      created: new Date().toISOString()
-    };
-    $("apex_money_title").value = "";
-    $("apex_money_amount").value = "";
-    $("apex_money_type").value = "";
-    $("apex_money_notes").value = "";
-  }else if(kind === "sales"){
-    const title = val("apex_sale_title");
-    if(!title){ alert("Sale name required."); return; }
-    item = {
-      id, title,
-      amount: Number($("apex_sale_amount").value || 0),
-      status: val("apex_sale_status") || "pitched",
-      notes: val("apex_sale_notes"),
-      created: new Date().toISOString()
-    };
-    $("apex_sale_title").value = "";
-    $("apex_sale_amount").value = "";
-    $("apex_sale_status").value = "";
-    $("apex_sale_notes").value = "";
-  }else if(kind === "scale"){
-    const title = val("apex_scale_title");
-    if(!title){ alert("Scale item required."); return; }
-    item = {
-      id, title,
-      status: val("apex_scale_status") || "idea",
-      notes: val("apex_scale_notes"),
-      created: new Date().toISOString()
-    };
-    $("apex_scale_title").value = "";
-    $("apex_scale_status").value = "";
-    $("apex_scale_notes").value = "";
-  }
-
-  if(!item) return;
-  data[kind] = data[kind] || [];
-  data[kind].unshift(item);
-  setApex(data);
-  renderApexList(kind);
-}
-function apexDelete(kind, id){
-  const data = getApex();
-  data[kind] = (data[kind] || []).filter(x => x.id !== id);
-  setApex(data);
-  renderApexList(kind);
-}
-function renderApexList(kind){
-  const el = $("apex_list_" + kind);
-  if(!el) return;
-  const items = getApex()[kind] || [];
-  if(!items.length){
-    el.innerHTML = `<p class="apex-meta">No ${kind} yet.</p>`;
-    return;
-  }
-  el.innerHTML = items.map(item => {
-    let title = item.name || item.title || "Item";
-    let meta = "";
-    if(kind === "leads") meta = [item.source, item.notes].filter(Boolean).join(" · ");
-    if(kind === "opportunities") meta = `$${Number(item.value||0).toLocaleString()} · ${item.stage || ""}${item.notes ? " · " + item.notes : ""}`;
-    if(kind === "money") meta = `${item.type || ""} · $${Number(item.amount||0).toLocaleString()}${item.notes ? " · " + item.notes : ""}`;
-    if(kind === "sales") meta = `$${Number(item.amount||0).toLocaleString()} · ${item.status || ""}${item.notes ? " · " + item.notes : ""}`;
-    if(kind === "scale") meta = `${item.status || ""}${item.notes ? " · " + item.notes : ""}`;
-    return `<div class="apex-row">
-      <div><strong>${escapeHtml(title)}</strong><div class="apex-meta">${escapeHtml(meta)}</div></div>
-      <button class="btn secondary" type="button" onclick="apexDelete('${kind}','${item.id}')">Delete</button>
-    </div>`;
-  }).join("");
-}
-function renderAllApex(){
-  ["leads","opportunities","money","sales","scale"].forEach(renderApexList);
-}
-function escapeHtml(s){
-  return String(s || "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;");
-}
-function apexExport(){
-  const blob = new Blob([JSON.stringify(getApex(), null, 2)], { type: "application/json" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(blob);
-  a.download = "mirrorpath-apex-" + new Date().toISOString().slice(0,10) + ".json";
-  a.click();
-  URL.revokeObjectURL(a.href);
-}
-function wireOwnerEntry(){
-  const hint = $("ownerHint");
-  const logo = $("logoTap");
-  if(hint){
-    hint.onclick = () => {
-      if(isApexUnlocked()){
-        if(!$("mainApp").classList.contains("hidden")) showSection("apex");
-        else openApexGate();
-      }else openApexGate();
-    };
-  }
-  // Triple-click logo also opens owner gate
-  if(logo){
-    let clicks = 0;
-    let timer = null;
-    logo.onclick = () => {
-      clicks++;
-      clearTimeout(timer);
-      timer = setTimeout(() => { clicks = 0; }, 700);
-      if(clicks >= 3){
-        clicks = 0;
-        if(isApexUnlocked()) showSection("apex");
-        else openApexGate();
-      }
-    };
-  }
-  $("apexPinInput")?.addEventListener("keydown", e => {
-    if(e.key === "Enter") apexTryUnlock();
-  });
-  // Deep link: ?apex=1 opens unlock (never auto-unlocks)
-  const params = new URLSearchParams(window.location.search);
-  if(params.get("apex") === "1"){
-    openApexGate();
-  }
-  syncApexNav();
-}
-
-function dayNumber(st){
-  const start = new Date(st.started || new Date().toISOString());
-  const diff = Math.floor((Date.now() - start.getTime()) / 86400000) + 1;
-  return Math.max(1, Math.min(90, diff));
-}
-
-const quotes = [
-  "Self-discipline is the bridge between goals and accomplishment.",
-  "Character is built when no one is watching.",
-  "You do not become successful. You become disciplined.",
-  "Consistency turns effort into identity.",
-  "Every habit you repeat is a vote for the person you are becoming.",
-  "The mirror will not lie for you — or to you.",
-  "Success is the result of daily decisions, not occasional inspiration."
-];
-
 function setupApp(){
   const st = getState() || {};
   st.journal = st.journal || {};
+  st.pathLogs = st.pathLogs || {};
   setState(st);
+  $("navUserLine").textContent = `${st.name || "Traveler"} · ${st.tier || "path"} · Day ${dayNumber(st)}`;
+  renderDashboard();
   renderToday();
+  renderBrief();
+  renderAllPaths();
+  renderPathWork();
   buildGridOnce(true);
   renderProfile();
+  renderSpeechRoom();
+  syncApexNav();
+}
+
+function renderDashboard(){
+  const st = getState() || {};
+  const name = st.name || "Traveler";
+  $("dashHello").textContent = `Welcome, ${name}`;
+  $("dashSub").textContent = `Day ${dayNumber(st)} of 90 · Primary path: ${pathTitle(st.q_path)} · Tier: ${st.tier || "seal"}`;
+  $("dashBrief").textContent = st.dailyBrief || buildDailyBrief(st);
+  const keys = Object.keys(PATHS);
+  $("dashPathCards").innerHTML = keys.map(k => {
+    const p = PATHS[k];
+    const active = k === st.q_path;
+    return `<div class="path-card" onclick="selectPath('${k}')">
+      <h3>${p.title}${active ? " · Active" : ""}</h3>
+      <p>${p.blurb}</p>
+    </div>`;
+  }).join("");
+}
+
+function selectPath(key){
+  const st = getState() || {};
+  st.q_path = key;
+  st.dailyBrief = buildDailyBrief(st);
+  setState(st);
+  renderDashboard();
+  renderPathWork();
+  showSection("pathwork");
+  speak(`Primary path set to ${PATHS[key].title}. ${PATHS[key].prompt}`);
 }
 
 function renderToday(){
   const st = getState() || {};
   const day = dayNumber(st);
-
-  const j = st.journal[day] || {};
-  const yesterday = st.journal[day-1];
-
+  const j = (st.journal && st.journal[day]) || {};
+  const yesterday = st.journal && st.journal[day - 1];
   $("dayHeader").textContent = `Day ${day} of 90`;
-  $("dailyQuote").textContent = quotes[(day-1) % quotes.length];
-
+  $("dailyQuote").textContent = quotes[(day - 1) % quotes.length];
   const name = st.name || "You";
-  const purpose = st.contract?.purpose || "your purpose";
-
-  let morningMessage = "";
+  const purpose = st.contract?.purpose || st.q_want || "your purpose";
+  let morningMessage;
   if(yesterday && yesterday.evening){
-    morningMessage = `${name}, yesterday you wrote:
-
-"${yesterday.evening.lesson || "No lesson recorded."}"
-
-Today you move one step closer to:
-${purpose}
-
-Your job this morning:
-• Decide who you will be today.
-• Choose one discipline you will not break.
-• Remember what you are grateful for.`;
+    morningMessage = `${name}, yesterday you wrote:\n\n"${yesterday.evening.lesson || "No lesson recorded."}"\n\nToday you move one step closer to:\n${purpose}\n\nDecide who you will be. Choose one discipline. Stay grateful.`;
   }else{
-    morningMessage = `${name}, this is the beginning.
-
-You chose a purpose:
-${purpose}
-
-Today is not about being perfect.
-It is about being honest and consistent.
-
-Write who you will be today.
-Choose one discipline you will not break.
-List what you are grateful for.
-
-You are building the future you — one day at a time.`;
+    morningMessage = `${name}, this is the work.\n\nYou chose a purpose:\n${purpose}\n\nToday is not about perfection. It is about honesty and consistency.\nWrite who you will be. Choose one discipline. List gratitude.`;
   }
   $("morningMirror").textContent = morningMessage;
-
-  $("morningIntent").value     = j.morning?.intent     || "";
-  $("morningAction").value     = j.morning?.action     || "";
-  $("morningGratitude").value  = j.morning?.gratitude  || "";
-  $("eveningTruth").value      = j.evening?.truth      || "";
-  $("eveningLesson").value     = j.evening?.lesson     || "";
+  $("morningIntent").value = j.morning?.intent || "";
+  $("morningAction").value = j.morning?.action || "";
+  $("morningGratitude").value = j.morning?.gratitude || "";
+  $("eveningTruth").value = j.evening?.truth || "";
+  $("eveningLesson").value = j.evening?.lesson || "";
   $("eveningCorrection").value = j.evening?.correction || "";
   $("eveningMirror").textContent = j.mirror || "";
 }
@@ -1298,6 +1230,7 @@ function saveMorning(){
     gratitude: $("morningGratitude").value.trim()
   };
   setState(st);
+  speak("Morning saved. Now live it.");
 }
 
 function saveEvening(){
@@ -1310,57 +1243,98 @@ function saveEvening(){
     lesson: $("eveningLesson").value.trim(),
     correction: $("eveningCorrection").value.trim()
   };
-
   const name = st.name || "You";
-  const lesson = st.journal[day].evening.lesson || "You learned something — write it clearly tomorrow.";
+  const lesson = st.journal[day].evening.lesson || "Write the lesson clearly tomorrow.";
   const correction = st.journal[day].evening.correction || "Stay honest and keep moving.";
-
-  const mirrorText = `${name}, you showed up for yourself today.
-
-The point is not that you were perfect.
-The point is that you told the truth and chose to correct it.
-
-Today’s lesson:
-${lesson}
-
-Tomorrow’s correction:
-${correction}
-
-You are not your worst day.
-You are the pattern you build.
-Keep showing up.`;
-
+  const mirrorText = `${name}, you showed up.\n\nNot perfect — honest.\n\nToday's lesson:\n${lesson}\n\nTomorrow's correction:\n${correction}\n\nYou are the pattern you build. Keep showing up.`;
   st.journal[day].mirror = mirrorText;
   setState(st);
-
   $("eveningMirror").textContent = mirrorText;
   buildGridOnce(true);
+  speak(mirrorText);
 }
 
-function speakMorning(){
-  speak($("morningMirror").textContent);
+function speakMorning(){ speak($("morningMirror").textContent); }
+function speakEvening(){ speak($("eveningMirror").textContent || "Save evening first."); }
+
+function renderBrief(){
+  const st = getState() || {};
+  const brief = st.dailyBrief || buildDailyBrief(st);
+  $("briefText").textContent = brief;
 }
-function speakEvening(){
-  const text = $("eveningMirror").textContent || "Save your evening reflection first.";
-  speak(text);
+function playBrief(){
+  const st = getState() || {};
+  const brief = st.dailyBrief || buildDailyBrief(st);
+  $("briefText").textContent = brief;
+  speak(brief);
+}
+function rebuildBrief(){
+  const st = getState() || {};
+  st.dailyBrief = buildDailyBrief(st);
+  setState(st);
+  renderBrief();
+  speak(st.dailyBrief);
+}
+
+function renderAllPaths(){
+  $("allPathCards").innerHTML = Object.keys(PATHS).map(k => {
+    const p = PATHS[k];
+    return `<div class="path-card" onclick="selectPath('${k}')">
+      <h3>${p.title}</h3>
+      <p>${p.blurb}</p>
+      <small class="gold">Open path work →</small>
+    </div>`;
+  }).join("");
+}
+
+function renderPathWork(){
+  const st = getState() || {};
+  const key = st.q_path || "discipline";
+  const p = PATHS[key];
+  $("pathWorkTitle").textContent = p.title;
+  $("pathWorkHelp").textContent = p.blurb;
+  $("pathWorkPrompt").textContent = p.prompt;
+  const logs = (st.pathLogs && st.pathLogs[key]) || [];
+  $("pathWorkHistory").innerHTML = logs.length
+    ? logs.slice(0, 8).map(l => `<div class="apex-row"><div><strong>${new Date(l.at).toLocaleString()}</strong><div class="apex-meta">${escapeHtml(l.text)}</div></div></div>`).join("")
+    : `<p class="apex-meta">No path work yet. Write today.</p>`;
+}
+
+function savePathWork(){
+  const st = getState() || {};
+  const key = st.q_path || "discipline";
+  const text = ($("pathWorkLog").value || "").trim();
+  if(!text){ alert("Write something real."); return; }
+  st.pathLogs = st.pathLogs || {};
+  st.pathLogs[key] = st.pathLogs[key] || [];
+  st.pathLogs[key].unshift({ at: new Date().toISOString(), text });
+  setState(st);
+  $("pathWorkLog").value = "";
+  renderPathWork();
+  speak("Path work saved. That is how character is recorded.");
+}
+
+function speakPathPrompt(){
+  const st = getState() || {};
+  const p = PATHS[st.q_path || "discipline"];
+  speak(`${p.title}. ${p.prompt}`);
 }
 
 function buildGridOnce(force){
   const grid = $("pathGrid");
+  if(!grid) return;
   if(grid.dataset.built === "1" && !force) return;
   grid.dataset.built = "1";
   grid.innerHTML = "";
-
   const st = getState() || {};
   st.journal = st.journal || {};
-
-  for(let d=1; d<=90; d++){
+  for(let d = 1; d <= 90; d++){
     const box = document.createElement("div");
     box.className = "day";
     box.textContent = d;
     if(st.journal[d]?.evening) box.classList.add("done");
     box.onclick = () => {
-      alert(`Day ${d} status:\n\nMorning:\n${st.journal[d]?.morning?.intent || "No entry."}\n\nEvening lesson:\n${st.journal[d]?.evening?.lesson || "No entry."}`);
+      alert(`Day ${d}\n\nMorning:\n${st.journal[d]?.morning?.intent || "No entry."}\n\nEvening:\n${st.journal[d]?.evening?.lesson || "No entry."}`);
     };
     grid.appendChild(box);
   }
@@ -1369,135 +1343,219 @@ function buildGridOnce(force){
 function renderProfile(){
   const st = getState() || {};
   const c = st.contract || {};
-  const completedDays = Object.values(st.journal || {}).filter(j => j.evening).length;
+  const completed = Object.values(st.journal || {}).filter(j => j.evening).length;
+  $("profileSummary").textContent = `Name: ${st.name || "-"}
+Tier: ${st.tier || "-"}
+Primary path: ${pathTitle(st.q_path)}
 
-  const profile = `Name: ${st.name || "-"}
-
-Who you said you are now:
+Who you are now:
 ${st.q_now || "-"}
 
 Who you must become:
 ${st.q_want || "-"}
 
-What has stopped you:
+What stopped you:
 ${st.q_why || "-"}
 
-Cost of staying the same:
+Cost of sameness:
 ${st.q_cost || "-"}
 
-Habits to build / break:
+Build / break:
 ${st.q_focus || "-"}
 
-Readiness when you started (1–10):
-${st.q_ready || "-"}
+Readiness: ${st.q_ready || "-"}/10
 
 CONTRACT
-Purpose:
-${c.purpose || "-"}
+Purpose: ${c.purpose || "-"}
+Target: ${c.target || "-"}
+Actions: ${c.actions || "-"}
+Refuse: ${c.refuse || "-"}
+Consequence: ${c.consequence || "-"}
+Signed: ${c.signature || "-"} @ ${c.signedAt ? new Date(c.signedAt).toLocaleString() : "-"}
 
-Target by Day 90:
-${c.target || "-"}
+Evening completions: ${completed} / 90`;
+}
 
-Non-negotiable daily actions:
-${c.actions || "-"}
-
-What you refuse to do anymore:
-${c.refuse || "-"}
-
-Consequence if you break your word:
-${c.consequence || "-"}
-
-Signed as: ${c.signature || "-"}
-Signed at: ${c.signedAt ? new Date(c.signedAt).toLocaleString() : "-"}
-
-Days with evening reflection completed:
-${completedDays} / 90`;
-
-  $("profileSummary").textContent = profile.trim();
+function renderSpeechRoom(){
+  $("speechroomIntro").textContent = introLines.join("\n\n");
+  const st = getState() || {};
+  $("speechroomPersonal").textContent = st.personalSpeech || "Complete questions to build your speech.";
+}
+function replayIntroFromApp(){ speak(introLines.join(" ")); }
+function replayPersonalFromApp(){
+  const st = getState() || {};
+  speak(st.personalSpeech || "No personal speech yet.");
 }
 
 /* =========================
-   BOOT LOGIC
+   APEX (owner)
+========================= */
+function isApexUnlocked(){ try{ return sessionStorage.getItem(APEX_SESSION_KEY) === "1"; }catch(e){ return false; } }
+function setApexUnlocked(on){
+  try{ if(on) sessionStorage.setItem(APEX_SESSION_KEY,"1"); else sessionStorage.removeItem(APEX_SESSION_KEY); }catch(e){}
+  syncApexNav();
+}
+function syncApexNav(){
+  const badge = $("apexNavBadge");
+  if(!badge) return;
+  if(isApexUnlocked()) badge.classList.add("visible"); else badge.classList.remove("visible");
+}
+function openApexGate(){
+  $("apexGateMsg").textContent = "";
+  $("apexPinInput").value = "";
+  $("apexGate").classList.remove("hidden");
+  setTimeout(() => $("apexPinInput")?.focus(), 40);
+}
+function closeApexGate(){ $("apexGate").classList.add("hidden"); }
+function apexTryUnlock(){
+  if(($("apexPinInput").value || "").trim() === APEX_PIN){
+    setApexUnlocked(true);
+    closeApexGate();
+    if(!$("mainApp").classList.contains("hidden")) showSection("apex");
+  }else $("apexGateMsg").textContent = "Wrong PIN.";
+}
+function apexLock(){ setApexUnlocked(false); showSection("dashboard"); }
+function getApex(){
+  try{
+    const raw = localStorage.getItem(APEX_STORAGE_KEY);
+    return raw ? JSON.parse(raw) : { leads:[], opportunities:[], money:[], sales:[], scale:[] };
+  }catch(e){ return { leads:[], opportunities:[], money:[], sales:[], scale:[] }; }
+}
+function setApex(data){ localStorage.setItem(APEX_STORAGE_KEY, JSON.stringify(data)); }
+function showApexPanel(name, btn){
+  document.querySelectorAll(".apex-panel").forEach(p => p.classList.remove("active"));
+  document.querySelectorAll("#apexTabs button").forEach(b => b.classList.remove("active"));
+  $("apex-" + name)?.classList.add("active");
+  if(btn) btn.classList.add("active");
+}
+function apexAdd(kind){
+  const data = getApex();
+  const id = Date.now().toString(36);
+  let item = null;
+  if(kind === "leads"){
+    if(!val("apex_lead_name")) return alert("Name required");
+    item = { id, name: val("apex_lead_name"), source: val("apex_lead_source"), notes: val("apex_lead_notes"), created: new Date().toISOString() };
+    ["apex_lead_name","apex_lead_source","apex_lead_notes"].forEach(i => $(i).value = "");
+  }else if(kind === "opportunities"){
+    if(!val("apex_opp_title")) return alert("Title required");
+    item = { id, title: val("apex_opp_title"), value: Number($("apex_opp_value").value||0), stage: val("apex_opp_stage")||"new", notes: val("apex_opp_notes"), created: new Date().toISOString() };
+    ["apex_opp_title","apex_opp_value","apex_opp_stage","apex_opp_notes"].forEach(i => $(i).value = "");
+  }else if(kind === "money"){
+    if(!val("apex_money_title")) return alert("Title required");
+    item = { id, title: val("apex_money_title"), amount: Number($("apex_money_amount").value||0), type: val("apex_money_type")||"expense", notes: val("apex_money_notes"), created: new Date().toISOString() };
+    ["apex_money_title","apex_money_amount","apex_money_type","apex_money_notes"].forEach(i => $(i).value = "");
+  }else if(kind === "sales"){
+    if(!val("apex_sale_title")) return alert("Title required");
+    item = { id, title: val("apex_sale_title"), amount: Number($("apex_sale_amount").value||0), status: val("apex_sale_status")||"pitched", notes: val("apex_sale_notes"), created: new Date().toISOString() };
+    ["apex_sale_title","apex_sale_amount","apex_sale_status","apex_sale_notes"].forEach(i => $(i).value = "");
+  }else if(kind === "scale"){
+    if(!val("apex_scale_title")) return alert("Title required");
+    item = { id, title: val("apex_scale_title"), status: val("apex_scale_status")||"idea", notes: val("apex_scale_notes"), created: new Date().toISOString() };
+    ["apex_scale_title","apex_scale_status","apex_scale_notes"].forEach(i => $(i).value = "");
+  }
+  if(!item) return;
+  data[kind] = data[kind] || [];
+  data[kind].unshift(item);
+  setApex(data);
+  renderApexList(kind);
+}
+function apexDelete(kind, id){
+  const data = getApex();
+  data[kind] = (data[kind]||[]).filter(x => x.id !== id);
+  setApex(data);
+  renderApexList(kind);
+}
+function renderApexList(kind){
+  const el = $("apex_list_" + kind);
+  if(!el) return;
+  const items = getApex()[kind] || [];
+  if(!items.length){ el.innerHTML = `<p class="apex-meta">No ${kind} yet.</p>`; return; }
+  el.innerHTML = items.map(item => {
+    const title = item.name || item.title || "Item";
+    let meta = item.notes || "";
+    if(kind === "leads") meta = [item.source, item.notes].filter(Boolean).join(" · ");
+    if(kind === "opportunities") meta = `$${Number(item.value||0).toLocaleString()} · ${item.stage||""}`;
+    if(kind === "money") meta = `${item.type} · $${Number(item.amount||0).toLocaleString()}`;
+    if(kind === "sales") meta = `$${Number(item.amount||0).toLocaleString()} · ${item.status||""}`;
+    if(kind === "scale") meta = item.status || "";
+    return `<div class="apex-row"><div><strong>${escapeHtml(title)}</strong><div class="apex-meta">${escapeHtml(meta)}</div></div>
+      <button class="btn secondary" type="button" onclick="apexDelete('${kind}','${item.id}')">Delete</button></div>`;
+  }).join("");
+}
+function renderAllApex(){ ["leads","opportunities","money","sales","scale"].forEach(renderApexList); }
+function escapeHtml(s){
+  return String(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+}
+function apexExport(){
+  const blob = new Blob([JSON.stringify(getApex(), null, 2)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "mirrorpath-apex.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+function wireOwnerEntry(){
+  $("ownerHint").onclick = () => isApexUnlocked() ? showSection("apex") : openApexGate();
+  let clicks = 0, t = null;
+  $("logoTap").onclick = () => {
+    clicks++; clearTimeout(t); t = setTimeout(() => clicks = 0, 700);
+    if(clicks >= 3){ clicks = 0; isApexUnlocked() ? showSection("apex") : openApexGate(); }
+  };
+  $("apexPinInput")?.addEventListener("keydown", e => { if(e.key === "Enter") apexTryUnlock(); });
+  if(new URLSearchParams(location.search).get("apex") === "1") openApexGate();
+  syncApexNav();
+}
+
+/* =========================
+   BOOT
 ========================= */
 function boot(){
   $("resetBtn").onclick = resetAll;
+  $("beginBtn").onclick = () => {
+    const s = getState() || {};
+    s.stage = "intro";
+    s.started = s.started || new Date().toISOString();
+    setState(s);
+    startIntro();
+  };
+  $("stripeSeal").href = STRIPE.seal;
+  $("stripePath").href = STRIPE.path;
+  $("stripeForge").href = STRIPE.forge;
   wireOwnerEntry();
 
-  // Handle Stripe return: ?paid=1 OR /start
-  const params = new URLSearchParams(window.location.search);
-  const hasPaidQuery = params.get("paid") === "1";
-  const pathIsStart = window.location.pathname.endsWith("/start");
-  const fromStripe = hasPaidQuery || pathIsStart;
-
+  const params = new URLSearchParams(location.search);
+  const fromStripe = params.get("paid") === "1" || location.pathname.endsWith("/start");
   if(fromStripe){
     let st = getState() || {};
-    if(st.contractSigned){
+    if(st.stage === "tiers" || st.contractSigned || st.name){
       st.paid = true;
-      st.stage = "paid";
+      st.tier = st.tier || "seal";
       st.paidAt = new Date().toISOString();
-      st.journal = st.journal || {};
+      st.stage = st.contractSigned ? "app" : "paid";
       setState(st);
     }
-    if(hasPaidQuery){
-      // keep ?apex= if present
-      const keep = params.get("apex") === "1" ? "?apex=1" : "";
-      window.history.replaceState({}, document.title, window.location.pathname + keep);
-    }
+    history.replaceState({}, document.title, location.pathname + (params.get("apex")==="1" ? "?apex=1" : ""));
+  }
+
+  // migrate v2 → v3 lightly
+  if(!getState()){
+    try{
+      const old = localStorage.getItem("mirrorpath_ai_v2");
+      if(old){ localStorage.setItem(STORAGE_KEY, old); }
+    }catch(e){}
   }
 
   const st = getState();
-
-  if(st && st.paid && st.stage === "app"){
-    showOnly("mainApp");
-    setupApp();
-    return;
-  }
-
-  if(st && st.paid && st.stage === "paid"){
-    showOnly("hero");
-    $("beginBtn").onclick = () => {
-      showPaidModal();
-    };
-    return;
-  }
-
-  if(st && st.contractSigned && !st.paid){
-    showOnly("hero");
-    $("beginBtn").onclick = () => {
-      showContract();
-    };
-    return;
-  }
-
-  if(st && st.stage === "questions"){
-    showOnly("hero");
-    $("beginBtn").onclick = () => {
-      showQuestions();
-    };
-    return;
-  }
-
-  if(st && st.stage === "contract"){
-    showOnly("hero");
-    $("beginBtn").onclick = () => {
-      showContract();
-    };
-    return;
-  }
-
-  // brand new
+  if(st && st.paid && st.contractSigned && st.stage === "app"){ showOnly("mainApp"); setupApp(); return; }
+  if(st && st.paid && !st.contractSigned){ showContract(); return; }
+  if(st && st.stage === "personal" && st.personalSpeech){ showPersonal(); return; }
+  if(st && st.stage === "tiers"){ showTiers(); return; }
+  if(st && st.stage === "questions"){ showOnly("hero"); $("beginBtn").onclick = showQuestions; return; }
+  if(st && st.stage === "contract"){ showContract(); return; }
   showOnly("hero");
-  $("beginBtn").onclick = () => {
-    const s2 = getState() || {};
-    s2.stage = "intro";
-    s2.started = s2.started || new Date().toISOString();
-    setState(s2);
-    startIntro();
-  };
 }
 
 boot();
 </script>
-
 </body>
 </html>
